@@ -42,9 +42,9 @@ class Home extends Component {
     return (
       <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>
-          <Icon name='unordered list' circular />
+          <Icon name='question' circular />
           <Header.Content>
-            Questions
+            Quiz Master
           </Header.Content>
         </Header>
         <Divider hidden section />
@@ -53,7 +53,7 @@ class Home extends Component {
           <Segment.Group>
             {questions.map((question, i) => {
               return (
-                <Segment key={i} onClick={() => this.getQuestion(question.id)}>
+                <Segment key={i}>
                   <Link to={`/question/${question.id}`}>{question.content}</Link>
                 </Segment>
               )

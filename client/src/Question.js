@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Container, Header, Button, Message, Icon, Divider, Form, Input } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Container, Header, Button, Message, Icon, Divider, Form, Label, Input } from 'semantic-ui-react'
 
 class Question extends Component {
   constructor() {
     super()
     this.state = {
       correct: false,
-      wrong: false,
+      wrong: false
     }
 
     const methods = ['getQuestion', 'handleChange', 'handleSubmit']
@@ -52,19 +53,21 @@ class Question extends Component {
     return (
       <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>
-          <Icon name='unordered list' circular />
+          <Icon name='question' circular />
           <Header.Content>
-            Question
+            Quiz Master
           </Header.Content>
         </Header>
         <Divider hidden section />
       {question &&
         <Form success={correct} error={wrong} onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>{question.content}</label>
+            <span>{question.content}</span>
             <Input name='answer' onChange={this.handleChange} placeholder='Answer here' />
           </Form.Field>
           <Button type='submit'>Submit</Button>
+          <Button as={Link} to='/'>Back to home</Button>
+
           <Message
             success
             header='Form Completed'
