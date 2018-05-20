@@ -17,7 +17,7 @@ class QuestionsController < ApiController
     data = params[:answer]
     result = @question.check_answer(data)
 
-    render json: { correct: result, answer: data }
+    render json: { correct: result }
   end
 
   private

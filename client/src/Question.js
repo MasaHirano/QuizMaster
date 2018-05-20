@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Header, Button, Message, Icon, Divider, Form, Label, Input } from 'semantic-ui-react'
+import { Container, Header, Button, Message, Icon, Divider, Form, Input } from 'semantic-ui-react'
 
 class Question extends Component {
   constructor() {
@@ -62,7 +62,7 @@ class Question extends Component {
       {question &&
         <Form success={correct} error={wrong} onSubmit={this.handleSubmit}>
           <Form.Field>
-            <span>{question.content}</span>
+            <div dangerouslySetInnerHTML={{ __html: question.content }} />
             <Input name='answer' onChange={this.handleChange} placeholder='Answer here' />
           </Form.Field>
           <Button type='submit'>Submit</Button>
@@ -70,13 +70,13 @@ class Question extends Component {
 
           <Message
             success
-            header='Form Completed'
-            content="You're all signed up for the newsletter"
+            header='Correct!'
+            content='Well done, challenger!'
           />
           <Message
             error
-            header='Action Forbidden'
-            content='You can only sign up for an account once with a given e-mail address.'
+            header='Incorrect...'
+            content='Try another answer!'
           />
         </Form>
       }
