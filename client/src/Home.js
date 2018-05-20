@@ -54,7 +54,7 @@ class Home extends Component {
             {questions.map((question, i) => {
               return (
                 <Segment key={i}>
-                  <Link to={`/question/${question.id}`}>{question.content}</Link>
+                  <Link to={`/question/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
                 </Segment>
               )
             })}
