@@ -1,5 +1,5 @@
 class QuestionsController < ApiController
-  before_action :set_question, only: [:show]
+  before_action :set_question, only: [:show, :answer]
 
   # GET /questions
   def index
@@ -11,6 +11,13 @@ class QuestionsController < ApiController
   # GET /questions/1
   def show
     render json: @question
+  end
+
+  def answer
+    data = params[:answer]
+    result = @question.check_answer(data)
+
+    render json: { correct: result, answer: data }
   end
 
   private
