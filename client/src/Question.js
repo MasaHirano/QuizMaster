@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
-import { Container, Header, Button, Icon, Divider, Form } from 'semantic-ui-react'
+import { Container, Header, Button, Message, Icon, Divider, Form, Input } from 'semantic-ui-react'
 
 class Question extends Component {
   constructor() {
     super()
-    this.state = {}
-    this.getQuestion = this.getQuestion.bind(this)
+    this.state = {
+      correct: false,
+      wrong: false,
+    }
+
+    const methods = ['getQuestion', 'handleChange', 'handleSubmit']
+    methods.forEach(method => this[method] = this[method].bind(this));
   }
 
   componentDidMount() {
@@ -24,8 +29,26 @@ class Question extends Component {
       .then(question => this.setState({ question: question }))
   }
 
+  handleChange(e, { name, value }) {
+    this.setState({ [name]: value })
+  }
+
+  handleSubmit(e, data) {
+    const { question, answer } = this.state
+    window.fetch(`/api/questions/${question.id}/answer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answer })
+      })
+      .then(response => response.json())
+      .then(result => this.setState({ correct: result.correct, wrong: !result.correct }))
+      .catch(error => console.log(error))
+  }
+
   render() {
-    let { question } = this.state
+    let { question, correct, wrong } = this.state
     return (
       <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>
@@ -36,12 +59,22 @@ class Question extends Component {
         </Header>
         <Divider hidden section />
       {question &&
-        <Form>
+        <Form success={correct} error={wrong} onSubmit={this.handleSubmit}>
           <Form.Field>
             <label>{question.content}</label>
-            <input placeholder='Answer here' />
+            <Input name='answer' onChange={this.handleChange} placeholder='Answer here' />
           </Form.Field>
           <Button type='submit'>Submit</Button>
+          <Message
+            success
+            header='Form Completed'
+            content="You're all signed up for the newsletter"
+          />
+          <Message
+            error
+            header='Action Forbidden'
+            content='You can only sign up for an account once with a given e-mail address.'
+          />
         </Form>
       }
       </Container>

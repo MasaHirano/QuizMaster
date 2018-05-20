@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   scope '/api' do
-    resources :questions
+    resources :questions do
+      member do
+        post :answer
+      end
+    end
   end
 end

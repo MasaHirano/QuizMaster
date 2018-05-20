@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import { Container, Header, Segment, Icon, Divider } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -38,7 +38,7 @@ class Home extends Component {
   }
 
   render() {
-    let { questions, question } = this.state
+    let { questions } = this.state
     return (
       <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>

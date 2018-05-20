@@ -10,4 +10,7 @@
 #
 
 class Question < ApplicationRecord
+  def check_answer(answer)
+    false
+  end
 end
