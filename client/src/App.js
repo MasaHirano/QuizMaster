@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Home'
+import Question from './Question'
 import NotFound from './NotFound'
 
 class App extends Component {
@@ -9,6 +10,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/question/:id' component={Question} />
           <Route component={NotFound} />
         </Switch>
       </Router>

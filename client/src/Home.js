@@ -53,8 +53,8 @@ class Home extends Component {
           <Segment.Group>
             {questions.map((question, i) => {
               return (
-                <Segment key={i} onClick={() => this.getQuestion(questions[i].id)}>
-                  <Link to='#'>{question.content}</Link>
+                <Segment key={i} onClick={() => this.getQuestion(question.id)}>
+                  <Link to={`/question/${question.id}`}>{question.content}</Link>
                 </Segment>
               )
             })}
