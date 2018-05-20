@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Segment, Icon, Divider } from 'semantic-ui-react'
+import { Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -41,23 +41,16 @@ class Home extends Component {
     let { questions } = this.state
     return (
       <Container text>
-        <Header as='h2' icon textAlign='center' color='teal'>
-          <Icon name='question' circular />
-          <Header.Content>
-            Quiz Master
-          </Header.Content>
-        </Header>
-        <Divider hidden section />
       {questions &&
         <Container>
           <Segment.Group>
-            {questions.map((question, i) => {
-              return (
-                <Segment key={i}>
-                  <Link to={`/question/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
-                </Segment>
-              )
-            })}
+          {questions.map((question, i) => {
+            return (
+              <Segment key={i}>
+                <Link to={`/question/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
+              </Segment>
+            )
+          })}
           </Segment.Group>
         </Container>
       }
