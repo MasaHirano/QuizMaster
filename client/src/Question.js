@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Header, Button, Message, Icon, Divider, Form, Input } from 'semantic-ui-react'
+import { Container, Button, Message, Form, Input } from 'semantic-ui-react'
 
 class Question extends Component {
   constructor() {
@@ -52,13 +52,6 @@ class Question extends Component {
     let { question, correct, wrong } = this.state
     return (
       <Container text>
-        <Header as='h2' icon textAlign='center' color='teal'>
-          <Icon name='question' circular />
-          <Header.Content>
-            Quiz Master
-          </Header.Content>
-        </Header>
-        <Divider hidden section />
       {question &&
         <Form success={correct} error={wrong} onSubmit={this.handleSubmit}>
           <Form.Field>
