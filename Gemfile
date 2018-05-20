@@ -54,5 +54,8 @@ end
 gem 'devise'
 gem 'activeadmin'
 
+# Convert numbers to words using I18N.
+gem 'numbers_and_words'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
