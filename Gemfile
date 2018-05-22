@@ -33,6 +33,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # RSpec for Rails-3+ http://relishapp.com/rspec/rspec-rails
   gem 'rspec-rails', '~> 3.7'
+  # Factory Bot ♥ Rails https://thoughtbot.com/services/ruby-on-rails
+  gem 'factory_bot_rails'
 end
 
 group :development do
