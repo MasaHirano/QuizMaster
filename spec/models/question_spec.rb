@@ -19,8 +19,8 @@ RSpec.describe Question, type: :model do
       it { is_expected.to be_empty }
     end
 
-    context 'with content which has disallowed tags like `<span style="color:red;">foo</span><% puts "bar" %>`' do
-      let(:question) { build(:question, content: '<span style="color:red;">foo</span><% puts "bar" %>') }
+    context 'with content which has disallowed tags like `foo<% puts "bar" %>`' do
+      let(:question) { build(:question, content: 'foo<% puts "bar" %>') }
       it 'should have key :content and content start with "Disallowed tags or attributes are contained."' do
         expect(subject.fetch(:content)).to start_with('Disallowed tags or attributes are contained.')
       end
