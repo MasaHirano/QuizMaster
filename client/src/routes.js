@@ -10,7 +10,7 @@ const Routes = () => (
   <App>
     <Switch>
       <Route path='/' exact component={Home} />
-      <Route path='/question/:id' component={Question} />
+      <Route path='/questions/:id' component={Question} />
       <Route component={NotFound} />
     </Switch>
   </App>

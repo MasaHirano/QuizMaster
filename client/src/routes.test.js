@@ -24,8 +24,8 @@ describe('#routes', () => {
     expect(component.find(Home)).toHaveLength(1)
   })
 
-  it('renders question page for /question', () => {
-    const component = renderRoutes('/question/1')
+  it('renders question page for /questions', () => {
+    const component = renderRoutes('/questions/1')
     expect(component.find(Question)).toHaveLength(1)
   })
 
