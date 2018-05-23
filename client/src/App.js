@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Container, Header, Icon, Divider } from 'semantic-ui-react'
-import Home from './Home'
-import Question from './Question'
-import NotFound from './NotFound'
+import PropTypes from 'prop-types'
 
 class App extends Component {
   render() {
@@ -16,16 +13,14 @@ class App extends Component {
           </Header.Content>
         </Header>
         <Divider section />
-        <Router>
-          <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/question/:id' exact component={Question} />
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
+        {this.props.children}
       </Container>
     )
   }
+}
+
+App.propTypes = {
+  children: PropTypes.object.isRequired
 }
 
 export default App
