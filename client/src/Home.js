@@ -22,7 +22,7 @@ class Home extends Component {
   _getQuestions() {
     this.fetch('/api/questions')
       .then(questions => {
-        if (questions.length) {
+        if (questions && questions.length) {
           this.setState({ questions })
         } else {
           this.setState({ questions: [] })
@@ -40,7 +40,7 @@ class Home extends Component {
           {questions.map((question, i) => {
             return (
               <Segment key={i}>
-                <Link to={`/question/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
+                <Link to={`/questions/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
               </Segment>
             )
           })}
