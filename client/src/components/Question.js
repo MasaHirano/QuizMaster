@@ -1,63 +1,27 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Button, Message, Form, Input } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 class Question extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      correct: false,
-      wrong: false
-    }
-
-    this._getQuestion = this._getQuestion.bind(this)
-    this._handleChange = this._handleChange.bind(this)
-    this._handleSubmit = this._handleSubmit.bind(this)
   }
 
   componentDidMount() {
     const { id } = this.props.match.params
-    this._getQuestion(id)
-  }
-
-  fetch(endpoint) {
-    return window.fetch(endpoint)
-      .then(response => response.json())
-      .catch(error => console.log(error))
-  }
-
-  _getQuestion(id) {
-    this.fetch(`/api/questions/${id}`)
-      .then(question => this.setState({ question }))
-  }
-
-  _handleChange(e, { name, value }) {
-    this.setState({ [name]: value })
-  }
-
-  _handleSubmit(e, data) {
-    const { question, answer } = this.state
-    window.fetch(`/api/questions/${question.id}/answer`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ answer })
-      })
-      .then(response => response.json())
-      .then(result => this.setState({ correct: result.correct, wrong: !result.correct }))
-      .catch(error => console.log(error))
+    this.props.onDidMount({ id })
   }
 
   render() {
-    let { question, correct, wrong } = this.state
+    const { question, answer, correct, wrong, onChange, onSubmit } = this.props
     return (
       <Container text>
       {question &&
-        <Form success={correct} error={wrong} onSubmit={this._handleSubmit}>
+        <Form success={correct} error={wrong} onSubmit={() => onSubmit({ question, answer })}>
           <Form.Field>
             <div dangerouslySetInnerHTML={{ __html: question.content }} />
-            <Input name='answer' onChange={this._handleChange} placeholder='Answer here' />
+            <Input name='answer' onChange={onChange} placeholder='Answer here' />
           </Form.Field>
           <Button type='submit'>Submit</Button>
           <Button as={Link} to='/'>Back to home</Button>
@@ -77,6 +41,21 @@ class Question extends Component {
       </Container>
     )
   }
+}
+
+Question.propTypes = {
+  onDidMount: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  correct: PropTypes.bool.isRequired,
+  wrong: PropTypes.bool.isRequired,
+  question: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    content: PropTypes.string.isRequired,
+    answer: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+  })
 }
 
 export default Question
