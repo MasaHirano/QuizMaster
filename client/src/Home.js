@@ -3,15 +3,14 @@ import { Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
-    this.getQuestions = this.getQuestions.bind(this)
-    this.getQuestion = this.getQuestion.bind(this)
+    this._getQuestions = this._getQuestions.bind(this)
   }
 
   componentDidMount() {
-    this.getQuestions()
+    this._getQuestions()
   }
 
   fetch(endpoint) {
@@ -20,21 +19,15 @@ class Home extends Component {
       .catch(error => console.log(error))
   }
 
-  getQuestions() {
+  _getQuestions() {
     this.fetch('/api/questions')
       .then(questions => {
-        if (questions.length) {
-          this.setState({ questions: questions })
-          this.getQuestion(questions[0].id)
+        if (questions && questions.length) {
+          this.setState({ questions })
         } else {
           this.setState({ questions: [] })
         }
       })
-  }
-
-  getQuestion(id) {
-    this.fetch(`/api/questions/${id}`)
-      .then(question => this.setState({question: question}))
   }
 
   render() {
@@ -47,7 +40,7 @@ class Home extends Component {
           {questions.map((question, i) => {
             return (
               <Segment key={i}>
-                <Link to={`/question/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
+                <Link to={`/questions/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
               </Segment>
             )
           })}

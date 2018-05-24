@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom'
 import { Container, Button, Message, Form, Input } from 'semantic-ui-react'
 
 class Question extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       correct: false,
       wrong: false
     }
 
-    const methods = ['getQuestion', 'handleChange', 'handleSubmit']
-    methods.forEach(method => this[method] = this[method].bind(this));
+    this._getQuestion = this._getQuestion.bind(this)
+    this._handleChange = this._handleChange.bind(this)
+    this._handleSubmit = this._handleSubmit.bind(this)
   }
 
   componentDidMount() {
     const { id } = this.props.match.params
-    this.getQuestion(id)
+    this._getQuestion(id)
   }
 
   fetch(endpoint) {
@@ -25,16 +26,16 @@ class Question extends Component {
       .catch(error => console.log(error))
   }
 
-  getQuestion(id) {
+  _getQuestion(id) {
     this.fetch(`/api/questions/${id}`)
-      .then(question => this.setState({ question: question }))
+      .then(question => this.setState({ question }))
   }
 
-  handleChange(e, { name, value }) {
+  _handleChange(e, { name, value }) {
     this.setState({ [name]: value })
   }
 
-  handleSubmit(e, data) {
+  _handleSubmit(e, data) {
     const { question, answer } = this.state
     window.fetch(`/api/questions/${question.id}/answer`, {
         method: 'POST',
@@ -53,10 +54,10 @@ class Question extends Component {
     return (
       <Container text>
       {question &&
-        <Form success={correct} error={wrong} onSubmit={this.handleSubmit}>
+        <Form success={correct} error={wrong} onSubmit={this._handleSubmit}>
           <Form.Field>
             <div dangerouslySetInnerHTML={{ __html: question.content }} />
-            <Input name='answer' onChange={this.handleChange} placeholder='Answer here' />
+            <Input name='answer' onChange={this._handleChange} placeholder='Answer here' />
           </Form.Field>
           <Button type='submit'>Submit</Button>
           <Button as={Link} to='/'>Back to home</Button>
