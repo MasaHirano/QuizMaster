@@ -1,10 +1,10 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { Route, Switch } from 'react-router'
 
-import App from './App';
-import Home from './Home';
-import Question from './Question';
-import NotFound from './NotFound';
+import App from './components/App'
+import Home from './components/Home'
+import Question from './containers/questionContainer'
+import NotFound from './components/NotFound'
 
 const Routes = () => (
   <App>
@@ -14,6 +14,6 @@ const Routes = () => (
       <Route component={NotFound} />
     </Switch>
   </App>
-);
+)
 
-export default Routes;
+export default Routes
