@@ -1,6 +1,15 @@
+import { handleActions } from 'redux-actions'
+
+import {
+  loadQuestion,
+  writeAnswer,
+  submitAnswer
+} from '../actions/questionActions'
+
 const initialState = {
   correct: false,
   wrong: false,
+  answer: '',
   question: {
     id: NaN,
     content: '',
@@ -10,23 +19,16 @@ const initialState = {
   }
 }
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'LOAD_QUESTION':
-      return Object.assign({}, state, action.payload)
+export default handleActions({
+  [loadQuestion]: (state, action) => Object.assign({}, state, action.payload),
 
-    case 'WRITE_ANSWER':
-      return Object.assign({}, state, {
-        [action.payload.name]: action.payload.value
-      });
+  [writeAnswer]: (state, action) => Object.assign({}, state, {
+    [action.payload.name]: action.payload.value
+  }),
 
-    case 'SUBMIT_ANSWER':
-      return Object.assign({}, state, {
-        correct: action.payload.correct,
-        wrong: !action.payload.correct,
-      });
+  [submitAnswer]: (state, action) => Object.assign({}, state, {
+    correct: action.payload.correct,
+    wrong: !action.payload.correct
+  }),
 
-    default:
-      return state;
-  }
-}
+}, initialState)

@@ -1,14 +1,5 @@
-export const loadQuestion = payload => ({
-  type: 'LOAD_QUESTION',
-  payload
-})
+import { createAction } from 'redux-actions'
 
-export const writeAnswer = payload => ({
-  type: 'WRITE_ANSWER',
-  payload
-})
-
-export const submitAnswer = payload => ({
-  type: 'SUBMIT_ANSWER',
-  payload
-})
+export const loadQuestion = createAction('LOAD_QUESTION')
+export const writeAnswer = createAction('WRITE_ANSWER')
+export const submitAnswer = createAction('SUBMIT_ANSWER')
