@@ -1,34 +1,31 @@
 import { handleActions } from 'redux-actions'
 
 import {
-  loadQuestion,
+  receiveQuestion,
   writeAnswer,
-  submitAnswer
+  receiveAnswerResult
 } from '../actions/questionActions'
 
 const initialState = {
-  correct: false,
-  wrong: false,
+  correct: null,
+  wrong: null,
   answer: '',
-  question: {
-    id: NaN,
-    content: '',
-    answer: '',
-    created_at: '',
-    updated_at: ''
-  }
+  question: { id: NaN, content: '', answer: '', created_at: '', updated_at: '' }
 }
 
 export default handleActions({
-  [loadQuestion]: (state, action) => Object.assign({}, state, action.payload),
+  [receiveQuestion]: (state, action) => ({
+    ...state, ...action.payload
+  }),
 
-  [writeAnswer]: (state, action) => Object.assign({}, state, {
+  [writeAnswer]: (state, action) => ({
+    ...state,
     [action.payload.name]: action.payload.value
   }),
 
-  [submitAnswer]: (state, action) => Object.assign({}, state, {
+  [receiveAnswerResult]: (state, action) => ({
+    ...state,
     correct: action.payload.correct,
     wrong: !action.payload.correct
   }),
-
 }, initialState)

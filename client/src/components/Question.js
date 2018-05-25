@@ -5,16 +5,15 @@ import PropTypes from 'prop-types'
 
 class Question extends Component {
   componentDidMount() {
-    const { id } = this.props.match.params
-    this.props.onDidMount({ id })
+    this.props.onDidMount({ id: this.props.match.params.id })
   }
 
   render() {
-    const { question, answer, correct, wrong, onChange, onSubmit } = this.props
+    const { question, correct, wrong, onChange, onSubmit } = this.props
     return (
       <Container text>
       {question &&
-        <Form success={correct} error={wrong} onSubmit={() => onSubmit({ question, answer })}>
+        <Form success={correct} error={wrong} onSubmit={onSubmit}>
           <Form.Field>
             <div dangerouslySetInnerHTML={{ __html: question.content }} />
             <Input name='answer' onChange={onChange} placeholder='Answer here' />
