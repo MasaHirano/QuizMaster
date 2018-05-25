@@ -2,21 +2,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
-import { createStore, combineReducers } from 'redux'
 import { ConnectedRouter } from 'react-router-redux'
 import 'semantic-ui-css/semantic.css'
 
-import * as rootReducer from './reducers';
+import configureStore from './store/configureStore'
 import Routes from './routes';
 import './index.css';
 
+const store = configureStore()
 const history = createHistory()
-
-const store = createStore(
-  combineReducers({
-    ...rootReducer
-  })
-);
 
 render(
   <Provider store={store}>
