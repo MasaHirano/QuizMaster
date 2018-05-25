@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+
 import Question from '../components/Question'
 import { writeAnswer, submitAnswer, loadQuestion } from '../actions/questionActions'
 

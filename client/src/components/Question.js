@@ -47,8 +47,8 @@ Question.propTypes = {
     id: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
     answer: PropTypes.string.isRequired,
-    created_at: PropTypes.string.isRequired,
-    updated_at: PropTypes.string.isRequired,
+    created_at: PropTypes.string,
+    updated_at: PropTypes.string,
   }),
   // functions
   onDidMount: PropTypes.func.isRequired,
