@@ -1,32 +1,31 @@
+import { handleActions } from 'redux-actions'
+
+import {
+  receiveQuestion,
+  writeAnswer,
+  receiveAnswerResult
+} from '../actions/questionActions'
+
 const initialState = {
-  correct: false,
-  wrong: false,
-  question: {
-    id: NaN,
-    content: '',
-    answer: '',
-    created_at: '',
-    updated_at: ''
-  }
+  correct: null,
+  wrong: null,
+  answer: '',
+  question: { id: NaN, content: '', answer: '', created_at: '', updated_at: '' }
 }
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'LOAD_QUESTION':
-      return Object.assign({}, state, action.payload)
+export default handleActions({
+  [receiveQuestion]: (state, action) => ({
+    ...state, ...action.payload
+  }),
 
-    case 'WRITE_ANSWER':
-      return Object.assign({}, state, {
-        [action.payload.name]: action.payload.value
-      });
+  [writeAnswer]: (state, action) => ({
+    ...state,
+    [action.payload.name]: action.payload.value
+  }),
 
-    case 'SUBMIT_ANSWER':
-      return Object.assign({}, state, {
-        correct: action.payload.correct,
-        wrong: !action.payload.correct,
-      });
-
-    default:
-      return state;
-  }
-}
+  [receiveAnswerResult]: (state, action) => ({
+    ...state,
+    correct: action.payload.correct,
+    wrong: !action.payload.correct
+  }),
+}, initialState)

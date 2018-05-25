@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class Home extends Component {
   constructor(props) {
@@ -50,6 +51,15 @@ class Home extends Component {
       </Container>
     )
   }
+}
+
+Home.propTypes = {
+  questions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      content: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired
 }
 
 export default Home
