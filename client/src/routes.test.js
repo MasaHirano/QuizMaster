@@ -3,12 +3,12 @@ import { MemoryRouter } from 'react-router'
 import { mount, shallow } from 'enzyme'
 
 import Routes from './routes'
-import Home from './components/Home'
-import Question from './components/Question'
+import Home from './containers/homeContainer'
+import Question from './containers/questionContainer'
 import NotFound from './components/NotFound'
 
-jest.mock('./components/Home')
-jest.mock('./components/Question')
+jest.mock('./containers/homeContainer')
+jest.mock('./containers/questionContainer')
 
 const renderRoutes = path => (
   mount(

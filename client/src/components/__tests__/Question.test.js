@@ -1,27 +1,43 @@
 import React from 'react';
-import Question from '../Question';
 import { Segment, Input } from 'semantic-ui-react'
 import { shallow, mount } from 'enzyme'
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router'
+
+import Question from '../Question'
 
 describe('<Question />', () => {
   let wrapper
+  let onChangeMock
+  let onSubmitMock
 
-  beforeAll(() => {
-    Question.prototype._getQuestion = jest.fn(function() {
-      this.setState({ question: { id: 1, content: 'foo', answer: 'bar' } })
-    })
-  })
   beforeEach(() => {
-    const props = { match: { params: { id: 1 } } }
+    onChangeMock = onSubmitMock = jest.fn()
+    const props = {
+      match: { params: { id: 1 } },
+      question: { id: 1, content: 'foo', answer: 'bar' },
+      onDidMount: jest.fn(),
+      onChange: onChangeMock,
+      onSubmit: onSubmitMock
+    }
     wrapper = shallow(<Question {...props} />)
   })
 
-  describe('_handleChange()', () => {
-    it('sets input data to state', () => {
-      const inputData = { name: 'answer', value: 'Tokyo' }
-      wrapper.find('Input[name="answer"]').simulate('change', {}, inputData)
-      expect(wrapper.instance().state).toHaveProperty(inputData.name, inputData.value)
+  beforeEach(() => {
+    const chars = ['T', 'o', 'k', 'y', 'o']
+    chars.reduce((joined, char) => {
+      wrapper.find('Input[name="answer"]').simulate('change', {}, joined += char)
+      return joined
+    }, '')
+  })
+
+  describe('render()', () => {
+    it('calls onChange five times when `Tokyo` is given in order', () => {
+      expect(onChangeMock).toHaveBeenCalledTimes(5)
+    })
+
+    it('calls onSubmit once when submit button is clicked', () => {
+      wrapper.find('Form').simulate('click')
+      expect(onSubmitMock).toHaveBeenCalled()
     })
   })
 })
