@@ -50,21 +50,3 @@ COPY --from=node /usr/local/bin/node /usr/local/bin/
 RUN ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn && \
     ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
     yarn --cwd client install
-
-
-
-
-
-
-
-
-
-
-# ------------------------------------------------------
-
-# FROM node:10.2.1-alpine
-
-# RUN apk update && \
-#     apk upgrade && \
-#     apk add --update --no-cache \
-#       bash
