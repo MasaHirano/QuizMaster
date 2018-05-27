@@ -6,7 +6,11 @@ services:
       - db_data:/var/lib/postgresql/data
   app:
     build: .
+    tty: true
+    stdin_open: true
     command: bundle exec foreman start -f Procfile.dev
+    environment:
+      - RAILS_MASTER_KEY=0d51362a3d1bba258ef4668824fd159b
     volumes:
       - .:/app:cached
       - bundle_data:/usr/local/bundle
