@@ -11,6 +11,6 @@ now = DateTime.now
 question_keys = %i(content answer created_at updated_at)
 question_values = [
   ['How many letters are there in the English alphabet?', '26', now, now],
-  ['What is the capital of Japan?', 'Tokyo', now, now],
+  ['What is the capital of <span style="color:red;">Japan</span> ?', 'Tokyo', now, now],
 ]
 Question.create!(question_values.map { |value| question_keys.zip(value).to_h })

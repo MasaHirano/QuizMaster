@@ -10,16 +10,15 @@
 #
 
 class Question < ApplicationRecord
-
   validates :content, :answer, presence: true
-  validate :content_can_only_accept_whitelisted_tags_or_attributes
+  validate :content_can_only_accept_whitelisted_tags_and_attributes
 
   def check_answer(given_answer)
-    correct_answer, given_answer = [answer, given_answer].map { |str| str.strip.downcase }
-    return true if correct_answer == given_answer
+    answers = [answer, given_answer].map { |str| str.strip.downcase }
+    return true if answers.first == answers.second
 
-    correct_answer, given_answer = [answer, given_answer].map { |str| numbers_to_words(str) }
-    return true if correct_answer == given_answer
+    answers = answers.map { |str| numbers_to_words(str) }
+    return true if answers.first == answers.second
 
     false
   end
@@ -30,7 +29,7 @@ class Question < ApplicationRecord
     string.gsub(/\d+/) { |str| str.to_i.to_words }
   end
 
-  def content_can_only_accept_whitelisted_tags_or_attributes
+  def content_can_only_accept_whitelisted_tags_and_attributes
     return if content.blank?
     sanitized = ActionController::Base.helpers.sanitize(content, attributes: %w(style))
     if content != sanitized

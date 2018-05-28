@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
 
-export const receiveQuestion = createAction('RECIEVE_QUESTION')
+export const receiveQuestion = createAction('RECEIVE_QUESTION')
 export const loadQuestion = ({ id }) => (dispatch, getState) => {
   window.fetch(`/api/questions/${id}`)
     .then(response => response.json())

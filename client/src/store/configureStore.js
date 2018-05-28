@@ -11,5 +11,5 @@ export default function configureStore() {
     applyMiddleware(thunk)
   )
 
-  return store;
+  return store
 }
