@@ -1,24 +1,66 @@
-# README
+# Quiz Master
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Quiz Master allows users to create test questions and answers.
 
-Things you may want to cover:
+- [Quiz Master](#quiz-master)
+  - [Getting started](#getting-started)
+  - [Managing quizzes](#managing-quizzes)
+  - [Playing quizzes](#playing-quizzes)
+  - [Testing](#testing)
+    - [Back-end](#back-end)
+    - [Front-end](#front-end)
+  - [Author](#author)
 
-* Ruby version
+## Getting started
 
-* System dependencies
+This project uses docker containers and they bind 3000 and 3001 ports to your machine.
+```
+$ git clone git@github.com:alpaca0984/QuizMaster.git
+$ cd QuizMaster
+$ docker-compose up
+$ docker-compose exec app bundle exec rails db:create db:migrate db:seed
+```
+Now, you can access localhost:3001/admin/ to manage quizzes and localhost:3000 to play them.
 
-* Configuration
+## Managing quizzes
 
-* Database creation
+When you access to http://localhost:3001/admin/ , a login page appears. Default user's account is here.
+- Email: `admin@example.com`
+- Password: `password`
 
-* Database initialization
+After login, click `Questions` tab on header, and you can make CRUD operations for questions.
 
-* How to run the test suite
+You can provide formatting or styling for the question content with some HTML tags and `style` attribute.
+I prepared an example in [db/seeds.rb](https://github.com/alpaca0984/QuizMaster/blob/master/db/seeds.rb#L14).
 
-* Services (job queues, cache servers, search engines, etc.)
+## Playing quizzes
 
-* Deployment instructions
+When you access to http://localhost:3000/ , all questions appear. Click them and you can show it and submit an answer. In cases wherein the answer is/contains a number, it should recognize the number as words.
 
-* ...
+Example:
+| Q: How many vowels are there in the English alphabet? A: 5 |           |
+|------------------------------------------------------------|-----------|
+| Answer by user on Quiz mode: 5                             | CORRECT   |
+| Answer by user on Quiz mode: five                          | CORRECT   |
+| Answer by user on Quiz mode: 6                             | INCORRECT |
+| Answer by user on Quiz mode: six                           | INCORRECT |
+
+## Testing
+
+### Back-end
+
+This script tests how Question model validates input data and checks given answers.
+```
+$ docker-compose run --rm app bundle exec rspec spec/models
+```
+
+### Front-end
+
+Using jest and enzyme to tests if components are rendered normally.
+```
+$ docker-compose run --rm app yarn --cwd client test
+```
+
+## Author
+
+Masataka Hirano - [alpaca0984](https://github.com/alpaca0984)
