@@ -8,7 +8,7 @@ services:
     build: .
     tty: true
     stdin_open: true
-    command: bundle exec foreman start -f Procfile.dev
+    command: bash -c "rm -f ./tmp/pids/server.pid && bundle exec foreman start -f Procfile.dev"
     environment:
       - RAILS_MASTER_KEY=0d51362a3d1bba258ef4668824fd159b
     volumes:
