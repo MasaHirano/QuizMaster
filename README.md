@@ -37,8 +37,9 @@ I prepared an example in [db/seeds.rb](https://github.com/alpaca0984/QuizMaster/
 
 When you access to http://localhost:3000/ , all questions appear. Click them and you can show it and submit an answer. In cases wherein the answer is/contains a number, it should recognize the number as words.
 
-Example:
-| Q: How many vowels are there in the English alphabet? A: 5 |           |
+Example: __Q: How many vowels are there in the English alphabet? A: 5__
+
+| Given answer                                               |           |
 |------------------------------------------------------------|-----------|
 | Answer by user on Quiz mode: 5                             | CORRECT   |
 | Answer by user on Quiz mode: five                          | CORRECT   |
