@@ -17,10 +17,11 @@ This project uses docker containers and they bind 3000 and 3001 ports to your ma
 ```
 $ git clone git@github.com:alpaca0984/QuizMaster.git
 $ cd QuizMaster
+$ docker-compose build
+$ docker-compose run --rm app bundle exec rails db:create db:migrate db:seed
 $ docker-compose up
-$ docker-compose exec app bundle exec rails db:create db:migrate db:seed
 ```
-Now, you can access localhost:3001/admin/ to manage quizzes and localhost:3000 to play them.
+Now, you can access `localhost:3001/admin/` to manage quizzes and `localhost:3000` to play them.
 
 ## Managing quizzes
 
