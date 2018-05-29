@@ -17,9 +17,6 @@ describe('<Question />', () => {
       onChange: onChangeMock,
       onSubmit: onSubmitMock
     }
-  })
-
-  beforeEach(() => {
     wrapper = shallow(<Question {...props} />)
     'Tokyo'.split('').reduce((joined, char) => {
       wrapper.find('Input[name="answer"]').simulate('change', {}, joined += char)
