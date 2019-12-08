@@ -7,14 +7,14 @@ const mapStateToProps = ({ questionReducer }) => {
   return { ...questionReducer }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, _ownProps) => {
   return {
     onDidMount: (payload) => {
       dispatch(loadQuestion(payload))
     },
 
     onChange: (e, { name, value }) => {
-      dispatch(writeAnswer({ name, value }))
+      dispatch(writeAnswer(name, value))
     },
 
     onSubmit: (e, data) => {
