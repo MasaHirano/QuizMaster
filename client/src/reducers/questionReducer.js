@@ -1,7 +1,8 @@
 import {
   RECEIVE_QUESTION,
   WRITE_ANSWER,
-  RECEIVE_ANSWER_RESULT
+  RECEIVE_ANSWER_RESULT,
+  CLEAR_STATE
 } from '../actions/questionActions'
 
 const initialState = {
@@ -35,6 +36,8 @@ export default function questionReducer(state = initialState, action) {
         correct: action.correct,
         wrong: !action.correct
       }
+    case CLEAR_STATE:
+      return initialState
     default:
       return state
   }

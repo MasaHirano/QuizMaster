@@ -41,3 +41,10 @@ export const submitAnswer = () => (dispatch, getState) => {
     .then(json => dispatch(receiveAnswerResult(json.correct)))
     .catch(error => console.error(error))
 }
+
+export const CLEAR_STATE = 'CLEAR_STATE'
+export const clearState = () => {
+  return {
+    type: CLEAR_STATE
+  }
+}

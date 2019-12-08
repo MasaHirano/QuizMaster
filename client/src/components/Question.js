@@ -4,8 +4,13 @@ import { Container, Button, Message, Form, Input } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 class Question extends Component {
+
   componentDidMount() {
     this.props.onDidMount({ id: this.props.match.params.id })
+  }
+
+  componentWillUnmount() {
+    this.props.onWillUnmount()
   }
 
   render() {
