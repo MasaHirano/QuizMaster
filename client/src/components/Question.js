@@ -17,27 +17,27 @@ class Question extends Component {
     const { question, correct, wrong, onChange, onSubmit } = this.props
     return (
       <Container text>
-      {question &&
-        <Form success={correct} error={wrong} onSubmit={onSubmit}>
-          <Form.Field>
-            <div dangerouslySetInnerHTML={{ __html: question.content }} />
-            <Input name='answer' onChange={onChange} placeholder='Answer here' />
-          </Form.Field>
-          <Button type='submit'>Submit</Button>
-          <Button as={Link} to='/'>Back to home</Button>
+        {question &&
+          <Form success={correct} error={wrong} onSubmit={onSubmit}>
+            <Form.Field>
+              <div dangerouslySetInnerHTML={{ __html: question.content }} />
+              <Input name='answer' onChange={onChange} placeholder='Answer here' />
+            </Form.Field>
+            <Button type='submit'>Submit</Button>
+            <Button as={Link} to='/'>Back to home</Button>
 
-          <Message
-            success
-            header='Correct!'
-            content='Well done, challenger!'
-          />
-          <Message
-            error
-            header='Incorrect...'
-            content='Try another answer!'
-          />
-        </Form>
-      }
+            <Message
+              success
+              header='Correct!'
+              content='Well done, challenger!'
+            />
+            <Message
+              error
+              header='Incorrect...'
+              content='Try another answer!'
+            />
+          </Form>
+        }
       </Container>
     )
   }
