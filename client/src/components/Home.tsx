@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Segment } from 'semantic-ui-react'
-import { HomeProps } from '../types'
+import { HomeProps } from '../types/homeTypes'
 
 class Home extends Component<HomeProps> {
 

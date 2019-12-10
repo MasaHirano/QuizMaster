@@ -1,11 +1,7 @@
-import { Question, HomeState } from "../types"
+import { Question, HomeState, RECEIVE_QUESTIONS, ActionReceiveQuestions } from "../types/homeTypes"
 import { ThunkAction } from "redux-thunk"
-import { ActionCreator, Action } from "redux"
+import { ActionCreator } from "redux"
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-type ActionReceiveQuestions = Action<typeof RECEIVE_QUESTIONS> & {
-  questions: Array<Question>
-}
 const receiveQuestions: ActionCreator<ActionReceiveQuestions> =
   (questions: Array<Question>) => {
     return {

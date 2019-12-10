@@ -1,7 +1,5 @@
-import {
-  RECEIVE_QUESTIONS
-} from '../actions/homeActions'
-import { HomeState } from '../types'
+import { HomeState, RECEIVE_QUESTIONS, HomeActionTypes } from '../types/homeTypes'
+import { Reducer } from 'redux'
 
 const initialState: HomeState = {
   questions: [
@@ -12,17 +10,17 @@ const initialState: HomeState = {
   ]
 }
 
-export default function homeReducer(
-  state: HomeState = initialState,
-  action: any
-): HomeState {
-  switch (action.type) {
-    case RECEIVE_QUESTIONS:
-      return {
-        ...state,
-        questions: action.questions
-      }
-    default:
-      return state
+const homeReducer: Reducer<HomeState, HomeActionTypes> =
+  (state = initialState, action) => {
+    switch (action.type) {
+      case RECEIVE_QUESTIONS:
+        return {
+          ...state,
+          questions: action.questions
+        }
+      default:
+        return state
+    }
   }
-}
+
+export default homeReducer
