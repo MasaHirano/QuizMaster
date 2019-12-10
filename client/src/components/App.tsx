@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Container, Header, Icon, Divider } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return(
       <Container text>
@@ -17,10 +16,6 @@ class App extends Component {
       </Container>
     )
   }
-}
-
-App.propTypes = {
-  children: PropTypes.object.isRequired
 }
 
 export default App

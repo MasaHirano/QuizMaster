@@ -1,8 +1,9 @@
 import {
   RECEIVE_QUESTIONS
 } from '../actions/homeActions'
+import { HomeState } from '../types'
 
-const initialState = {
+const initialState: HomeState = {
   questions: [
     {
       id: NaN,
@@ -11,7 +12,10 @@ const initialState = {
   ]
 }
 
-export default function homeReducer(state = initialState, action) {
+export default function homeReducer(
+  state: HomeState = initialState,
+  action: any
+): HomeState {
   switch (action.type) {
     case RECEIVE_QUESTIONS:
       return {
