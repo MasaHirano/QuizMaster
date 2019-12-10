@@ -1,25 +1,21 @@
 import { Question, HomeState } from "../types"
-import { Dispatch } from "redux"
-
-type ActionReceiveQuestions = {
-  type: String,
-  questions: Array<Question>
-}
+import { ThunkAction } from "redux-thunk"
+import { ActionCreator, Action } from "redux"
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-const receiveQuestions: (questions: Array<Question>) => ActionReceiveQuestions =
-  (questions) => {
+type ActionReceiveQuestions = Action<typeof RECEIVE_QUESTIONS> & {
+  questions: Array<Question>
+}
+const receiveQuestions: ActionCreator<ActionReceiveQuestions> =
+  (questions: Array<Question>) => {
     return {
       type: RECEIVE_QUESTIONS,
       questions
     }
   }
 
-export const loadQuestions: () => (
-  dispatch: Dispatch<ActionReceiveQuestions>,
-  getState: () => HomeState
-) => void =
-  () => (dispatch, _getState) => {
+export const loadQuestions: () => ThunkAction<void, HomeState, undefined, ActionReceiveQuestions> =
+  () => (dispatch) => {
     window.fetch('/api/questions')
       .then(response => response.json())
       .then(json => dispatch(receiveQuestions(json)))
