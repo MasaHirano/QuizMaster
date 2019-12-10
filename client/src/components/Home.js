@@ -12,19 +12,19 @@ class Home extends Component {
     let { questions } = this.props
     return (
       <Container text>
-      {questions &&
-        <Container>
-          <Segment.Group>
-          {questions.map((question, i) => {
-            return (
-              <Segment key={i}>
-                <Link to={`/questions/${question.id}`}>{question.content.replace(/<[^>]+>/g, '')}</Link>
-              </Segment>
-            )
-          })}
-          </Segment.Group>
-        </Container>
-      }
+        {questions &&
+          <Container>
+            <Segment.Group>
+              {questions.map((question, i) => (
+                <Segment key={i}>
+                  <Link to={`/questions/${question.id}`}>
+                    {question.content.replace(/<[^>]+>/g, '')}
+                  </Link>
+                </Segment>
+              ))}
+            </Segment.Group>
+          </Container>
+        }
       </Container>
     )
   }

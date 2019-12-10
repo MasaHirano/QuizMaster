@@ -1,22 +1,20 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter } from 'connected-react-router'
 import 'semantic-ui-css/semantic.css'
 
-import configureStore from './store/configureStore'
-import Routes from './routes';
-import './index.css';
+import configureStore, { history } from './store/configureStore'
+import Routes from './routes'
+import './index.css'
 
 const store = configureStore()
-const history = createHistory()
 
-render(
+ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */}
       <Routes />
     </ConnectedRouter>
-  </Provider>
-  , document.getElementById('root')
-);
+  </Provider>,
+  document.getElementById('root')
+)
