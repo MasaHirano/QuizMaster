@@ -1,23 +1,32 @@
 import { connect } from 'react-redux'
 
 import Question from '../components/Question'
-import { writeAnswer, submitAnswer, loadQuestion } from '../actions/questionActions'
+import {
+  writeAnswer,
+  submitAnswer,
+  loadQuestion,
+  clearState
+} from '../actions/questionActions'
 
 const mapStateToProps = ({ questionReducer }) => {
   return { ...questionReducer }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, _ownProps) => {
   return {
     onDidMount: (payload) => {
       dispatch(loadQuestion(payload))
     },
 
-    onChange: (e, { name, value }) => {
-      dispatch(writeAnswer({ name, value }))
+    onWillUnmount: () => {
+      dispatch(clearState())
     },
 
-    onSubmit: (e, data) => {
+    onChange: (_e, { name, value }) => {
+      dispatch(writeAnswer(name, value))
+    },
+
+    onSubmit: (_e, _data) => {
       dispatch(submitAnswer())
     }
   }

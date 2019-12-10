@@ -7,7 +7,7 @@ const mapStateToProps = ({ homeReducer }) => {
   return { ...homeReducer }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, _ownProps) => {
   return {
     onDidMount: () => {
       dispatch(loadQuestions())
