@@ -1,15 +1,22 @@
 import { Question, HomeState } from "../types"
 import { Dispatch } from "redux"
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-const receiveQuestions = (questions: Array<Question>) => {
-  return {
-    type: RECEIVE_QUESTIONS,
-    questions
-  }
+type ActionReceiveQuestions = {
+  type: String,
+  questions: Array<Question>
 }
+
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
+const receiveQuestions: (questions: Array<Question>) => ActionReceiveQuestions =
+  (questions) => {
+    return {
+      type: RECEIVE_QUESTIONS,
+      questions
+    }
+  }
+
 export const loadQuestions: () => (
-  dispatch: Dispatch,
+  dispatch: Dispatch<ActionReceiveQuestions>,
   getState: () => HomeState
 ) => void =
   () => (dispatch, _getState) => {
