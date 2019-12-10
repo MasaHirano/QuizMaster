@@ -6,7 +6,7 @@ import questionReducer from './questionReducer'
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
-  homeReducer,
+  home: homeReducer,
   questionReducer
 })
 export default createRootReducer
