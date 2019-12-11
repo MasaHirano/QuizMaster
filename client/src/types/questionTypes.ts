@@ -50,10 +50,15 @@ export const RECEIVE_QUESTION = 'RECEIVE_QUESTION'
 export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION> & QuestionLoaded
 
 export const WRITE_ANSWER = 'WRITE_ANSWER'
-export type ActionWriteAnswer = Action<typeof WRITE_ANSWER>
+export type ActionWriteAnswer = Action<typeof WRITE_ANSWER> & {
+  name: string,
+  value: string
+}
 
 export const RECEIVE_ANSWER_RESULT = 'RECEIVE_ANSWER_RESULT'
-export type ActionReceiveAnswerResult = Action<typeof RECEIVE_ANSWER_RESULT>
+export type ActionReceiveAnswerResult = Action<typeof RECEIVE_ANSWER_RESULT> & {
+  correct: boolean
+}
 
 export const CLEAR_STATE = 'CLEAR_STATE'
 export type ActionClearState = Action<typeof CLEAR_STATE>
