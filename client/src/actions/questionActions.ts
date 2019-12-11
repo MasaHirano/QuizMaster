@@ -1,19 +1,25 @@
-export const RECEIVE_QUESTION = 'RECEIVE_QUESTION'
-const receiveQuestion = (question) => {
-  return {
-    type: RECEIVE_QUESTION,
-    question
+import Question from "../components/Question"
+import { ActionCreator } from "redux"
+import { ActionReceiveQuestion, RECEIVE_QUESTION, QuestionState } from "../types/homeTypes"
+import { ThunkAction } from "redux-thunk"
+
+const receiveQuestion: ActionCreator<ActionReceiveQuestion> =
+  (question) => {
+    return {
+      type: RECEIVE_QUESTION,
+      question
+    }
   }
-}
-export const loadQuestion = ({ id }) => (dispatch, _getState) => {
-  window.fetch(`/api/questions/${id}`)
-    .then(response => response.json())
-    .then(json => dispatch(receiveQuestion(json)))
-    .catch(error => console.error(error))
-}
+export const loadQuestion: (question: Question) => ThunkAction<void, QuestionState, undefined, ActionReceiveQuestion> =
+  ({ id }: any) => (dispatch) => {
+    window.fetch(`/api/questions/${id}`)
+      .then(response => response.json())
+      .then(json => dispatch(receiveQuestion(json)))
+      .catch(error => console.error(error))
+  }
 
 export const WRITE_ANSWER = 'WRITE_ANSWER'
-export const writeAnswer = (name, value) => {
+export const writeAnswer = (name: any, value: any) => {
   return {
     type: WRITE_ANSWER,
     name,

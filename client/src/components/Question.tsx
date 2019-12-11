@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Container, Button, Message, Form, Input } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
+import { QuestionProps } from '../types/questionTypes'
 
-class Question extends Component {
+class Question extends Component<QuestionProps> {
 
   componentDidMount() {
     this.props.onDidMount({ id: this.props.match.params.id })
@@ -41,24 +41,6 @@ class Question extends Component {
       </Container>
     )
   }
-}
-
-Question.propTypes = {
-  // attributes
-  correct: PropTypes.bool,
-  wrong: PropTypes.bool,
-  answer: PropTypes.string,
-  question: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    content: PropTypes.string.isRequired,
-    answer: PropTypes.string.isRequired,
-    created_at: PropTypes.string,
-    updated_at: PropTypes.string,
-  }),
-  // functions
-  onDidMount: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
 }
 
 export default Question
