@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
@@ -12,7 +12,7 @@ const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */}
+    <ConnectedRouter history={history}>
       <Routes />
     </ConnectedRouter>
   </Provider>,

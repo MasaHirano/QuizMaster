@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { Container, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { Container, Segment } from 'semantic-ui-react'
+import { HomeProps } from '../types/homeTypes'
 
-class Home extends Component {
+class Home extends Component<HomeProps> {
+
   componentDidMount() {
     this.props.onDidMount()
   }
 
   render() {
-    let { questions } = this.props
+    const { questions } = this.props
     return (
       <Container text>
         {questions &&
@@ -28,15 +29,6 @@ class Home extends Component {
       </Container>
     )
   }
-}
-
-Home.propTypes = {
-  questions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      content: PropTypes.string.isRequired
-    }).isRequired
-  )
 }
 
 export default Home
