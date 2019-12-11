@@ -1,6 +1,6 @@
 import Question from "../components/Question"
 import { ActionCreator } from "redux"
-import { ActionReceiveQuestion, RECEIVE_QUESTION, QuestionState } from "../types/homeTypes"
+import { RECEIVE_QUESTION, QuestionState, ActionReceiveQuestion } from "../types/questionTypes"
 import { ThunkAction } from "redux-thunk"
 
 const receiveQuestion: ActionCreator<ActionReceiveQuestion> =
@@ -28,13 +28,13 @@ export const writeAnswer = (name: any, value: any) => {
 }
 
 export const RECEIVE_ANSWER_RESULT = 'RECEIVE_ANSWER_RESULT'
-export const receiveAnswerResult = (correct) => {
+export const receiveAnswerResult = (correct: any) => {
   return {
     type: RECEIVE_ANSWER_RESULT,
     correct
   }
 }
-export const submitAnswer = () => (dispatch, getState) => {
+export const submitAnswer = () => (dispatch: any, getState: any) => {
   const { question, answer } = getState().questionReducer
   window.fetch(`/api/questions/${question.id}/answer`, {
       method: 'POST',

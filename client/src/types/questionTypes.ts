@@ -1,9 +1,10 @@
 import { InputOnChangeData } from "semantic-ui-react"
 import { ChangeEvent } from "react"
-import { NavLinkProps, match, RouteComponentProps } from "react-router-dom"
+import { RouteComponentProps } from "react-router-dom"
+import { Action } from "redux"
 
 type QuestionId = {
-  id: number
+  id: string
 }
 export type QuestionDetail = QuestionId & {
   content: string,
@@ -31,3 +32,6 @@ export type QuestionProps =
   & QuestionState
   & QuestionDispatchProps
   & RouteComponentProps<QuestionId>
+
+export const RECEIVE_QUESTION = 'RECEIVE_QUESTION'
+export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION>

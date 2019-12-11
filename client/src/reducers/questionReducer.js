@@ -1,5 +1,5 @@
+import { RECEIVE_QUESTION } from '../types/questionTypes'
 import {
-  RECEIVE_QUESTION,
   WRITE_ANSWER,
   RECEIVE_ANSWER_RESULT,
   CLEAR_STATE
