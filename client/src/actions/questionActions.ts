@@ -1,7 +1,17 @@
-import Question from "../components/Question"
 import { ActionCreator } from "redux"
-import { RECEIVE_QUESTION, QuestionState, ActionReceiveQuestion } from "../types/questionTypes"
 import { ThunkAction } from "redux-thunk"
+import { AppState } from "../types/homeTypes"
+import {
+  QuestionId,
+  RECEIVE_QUESTION,
+  ActionReceiveQuestion,
+  WRITE_ANSWER,
+  ActionWriteAnswer,
+  RECEIVE_ANSWER_RESULT,
+  ActionReceiveAnswerResult,
+  CLEAR_STATE,
+  ActionClearState
+} from "../types/questionTypes"
 
 const receiveQuestion: ActionCreator<ActionReceiveQuestion> =
   (question) => {
@@ -10,46 +20,49 @@ const receiveQuestion: ActionCreator<ActionReceiveQuestion> =
       question
     }
   }
-export const loadQuestion: (question: Question) => ThunkAction<void, QuestionState, undefined, ActionReceiveQuestion> =
-  ({ id }: any) => (dispatch) => {
+export const loadQuestion: (
+  questionParams: QuestionId
+) => ThunkAction<void, AppState, undefined, ActionReceiveQuestion> =
+  ({ id }) => (dispatch) => {
     window.fetch(`/api/questions/${id}`)
       .then(response => response.json())
       .then(json => dispatch(receiveQuestion(json)))
       .catch(error => console.error(error))
   }
 
-export const WRITE_ANSWER = 'WRITE_ANSWER'
-export const writeAnswer = (name: any, value: any) => {
-  return {
-    type: WRITE_ANSWER,
-    name,
-    value
+export const writeAnswer: ActionCreator<ActionWriteAnswer> =
+  (name: string, value: string) => {
+    return {
+      type: WRITE_ANSWER,
+      name,
+      value
+    }
   }
-}
 
-export const RECEIVE_ANSWER_RESULT = 'RECEIVE_ANSWER_RESULT'
-export const receiveAnswerResult = (correct: any) => {
-  return {
-    type: RECEIVE_ANSWER_RESULT,
-    correct
+export const receiveAnswerResult: ActionCreator<ActionReceiveAnswerResult> =
+  (correct: boolean) => {
+    return {
+      type: RECEIVE_ANSWER_RESULT,
+      correct
+    }
   }
-}
-export const submitAnswer = () => (dispatch: any, getState: any) => {
-  const { question, answer } = getState().questionReducer
-  window.fetch(`/api/questions/${question.id}/answer`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ answer })
-    })
-    .then(response => response.json())
-    .then(json => dispatch(receiveAnswerResult(json.correct)))
-    .catch(error => console.error(error))
-}
+export const submitAnswer: () => ThunkAction<void, AppState, undefined, ActionReceiveAnswerResult> =
+  () => (dispatch, getState) => {
+    const { question, answer } = getState().question
+    window
+      .fetch(`/api/questions/${question.id}/answer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answer })
+      })
+      .then(response => response.json())
+      .then(json => dispatch(receiveAnswerResult(json.correct)))
+      .catch(error => console.error(error))
+  }
 
-export const CLEAR_STATE = 'CLEAR_STATE'
-export const clearState = () => {
+export const clearState: ActionCreator<ActionClearState> = () => {
   return {
     type: CLEAR_STATE
   }

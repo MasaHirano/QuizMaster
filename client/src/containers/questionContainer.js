@@ -8,9 +8,7 @@ import {
   clearState
 } from '../actions/questionActions'
 
-const mapStateToProps = ({ questionReducer }) => {
-  return { ...questionReducer }
-}
+const mapStateToProps = ({ question }) => question
 
 const mapDispatchToProps = (dispatch, _ownProps) => {
   return {

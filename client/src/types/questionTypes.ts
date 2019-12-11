@@ -3,7 +3,7 @@ import { ChangeEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { Action } from "redux"
 
-type QuestionId = {
+export type QuestionId = {
   id: string
 }
 export type QuestionDetail = QuestionId & {
@@ -35,3 +35,12 @@ export type QuestionProps =
 
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION'
 export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION>
+
+export const WRITE_ANSWER = 'WRITE_ANSWER'
+export type ActionWriteAnswer = Action<typeof WRITE_ANSWER>
+
+export const RECEIVE_ANSWER_RESULT = 'WRITE_ANSWER'
+export type ActionReceiveAnswerResult = Action<typeof WRITE_ANSWER>
+
+export const CLEAR_STATE = 'CLEAR_STATE'
+export type ActionClearState = Action<typeof CLEAR_STATE>
