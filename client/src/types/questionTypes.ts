@@ -1,5 +1,5 @@
-import { InputOnChangeData } from "semantic-ui-react"
-import { ChangeEvent } from "react"
+import { InputOnChangeData, FormProps } from "semantic-ui-react"
+import { ChangeEvent, FormEvent } from "react"
 import { RouteComponentProps } from "react-router-dom"
 import { Action } from "redux"
 
@@ -13,12 +13,21 @@ export type QuestionDetail = QuestionId & {
   updated_at: string
 }
 
-export type QuestionState = {
-  correct: boolean,
-  wrong: boolean,
-  answer: string,
+type QuestionLoaded = {
   question: QuestionDetail
 }
+type AnswerResult = {
+  correct: boolean,
+  wrong: boolean,
+}
+type AnswerSubmission = {
+  answer: string
+}
+export type QuestionState =
+  & QuestionLoaded
+  & AnswerResult
+  & AnswerSubmission
+
 export type QuestionDispatchProps = {
   onDidMount: (arg0: QuestionId) => void,
   onWillUnmount: () => void,
@@ -26,21 +35,31 @@ export type QuestionDispatchProps = {
     event: ChangeEvent<HTMLInputElement>,
     data: InputOnChangeData
   ) => void,
-  onSubmit: () => void
+  onSubmit: (
+    event: FormEvent<HTMLFormElement>,
+    data: FormProps
+  ) => void
 }
+
 export type QuestionProps =
   & QuestionState
   & QuestionDispatchProps
   & RouteComponentProps<QuestionId>
 
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION'
-export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION>
+export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION> & QuestionLoaded
 
 export const WRITE_ANSWER = 'WRITE_ANSWER'
 export type ActionWriteAnswer = Action<typeof WRITE_ANSWER>
 
-export const RECEIVE_ANSWER_RESULT = 'WRITE_ANSWER'
-export type ActionReceiveAnswerResult = Action<typeof WRITE_ANSWER>
+export const RECEIVE_ANSWER_RESULT = 'RECEIVE_ANSWER_RESULT'
+export type ActionReceiveAnswerResult = Action<typeof RECEIVE_ANSWER_RESULT>
 
 export const CLEAR_STATE = 'CLEAR_STATE'
 export type ActionClearState = Action<typeof CLEAR_STATE>
+
+export type QuestionActionTypes =
+  | ActionReceiveQuestion
+  | ActionWriteAnswer
+  | ActionReceiveAnswerResult
+  | ActionClearState

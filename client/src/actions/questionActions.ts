@@ -10,7 +10,7 @@ import {
   RECEIVE_ANSWER_RESULT,
   ActionReceiveAnswerResult,
   CLEAR_STATE,
-  ActionClearState
+  ActionClearState,
 } from "../types/questionTypes"
 
 const receiveQuestion: ActionCreator<ActionReceiveQuestion> =
@@ -58,12 +58,15 @@ export const submitAnswer: () => ThunkAction<void, AppState, undefined, ActionRe
         body: JSON.stringify({ answer })
       })
       .then(response => response.json())
-      .then(json => dispatch(receiveAnswerResult(json.correct)))
+      .then(json => {
+        dispatch(receiveAnswerResult(json.correct))
+      })
       .catch(error => console.error(error))
   }
 
-export const clearState: ActionCreator<ActionClearState> = () => {
-  return {
-    type: CLEAR_STATE
+export const clearState: ActionCreator<ActionClearState> =
+  () => {
+    return {
+      type: CLEAR_STATE
+    }
   }
-}

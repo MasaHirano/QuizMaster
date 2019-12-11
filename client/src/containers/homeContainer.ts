@@ -11,7 +11,7 @@ const mapStateToProps: MapStateToProps<HomeState, any, AppState> =
   (state: AppState) => state.home
 
 const mapDispatchToProps: MapDispatchToProps<HomeDispatchProps, null> =
-  (dispatch: ThunkDispatch<HomeState, undefined, Action<HomeActionTypes>>) => {
+  (dispatch: ThunkDispatch<AppState, undefined, Action<HomeActionTypes>>) => {
     return {
       onDidMount: () => {
         dispatch(loadQuestions())

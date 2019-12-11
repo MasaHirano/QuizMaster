@@ -1,4 +1,4 @@
-import { Question, HomeState, RECEIVE_QUESTIONS, ActionReceiveQuestions } from "../types/homeTypes"
+import { Question, RECEIVE_QUESTIONS, ActionReceiveQuestions, AppState } from "../types/homeTypes"
 import { ThunkAction } from "redux-thunk"
 import { ActionCreator } from "redux"
 
@@ -10,7 +10,7 @@ const receiveQuestions: ActionCreator<ActionReceiveQuestions> =
     }
   }
 
-export const loadQuestions: () => ThunkAction<void, HomeState, undefined, ActionReceiveQuestions> =
+export const loadQuestions: () => ThunkAction<void, AppState, undefined, ActionReceiveQuestions> =
   () => (dispatch) => {
     window.fetch('/api/questions')
       .then(response => response.json())
