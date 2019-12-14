@@ -1,4 +1,5 @@
 import { Action } from "redux"
+import { QuestionState } from "./questionTypes"
 
 export type Question = {
   id: Number,
@@ -21,5 +22,6 @@ export type HomeActionTypes =
 
 // TODO: other states must be added
 export type AppState = {
-  home: HomeState
+  home: HomeState,
+  question: QuestionState
 }
