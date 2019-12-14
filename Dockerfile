@@ -1,5 +1,5 @@
 FROM node:13.3.0-alpine AS node
-FROM ruby:2.5.1-alpine
+FROM ruby:2.6.5-alpine
 
 ENV LANG C.UTF-8
 
@@ -44,7 +44,7 @@ ADD . $ROOT_PATH
 # @see https://github.com/nodejs/docker-node/blob/cbdde22f468f5032a59d52330894544a0756f0fb/13/alpine3.10/Dockerfile#L72
 ENV YARN_VERSION 1.19.2
 
-RUN mkdir /opt
+RUN mkdir -p /opt
 COPY --from=node /opt/yarn-v$YARN_VERSION/ /opt/yarn-v$YARN_VERSION/
 COPY --from=node /usr/local/bin/node /usr/local/bin/
 RUN ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn && \
