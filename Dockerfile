@@ -1,4 +1,4 @@
-FROM node:10.2.1-alpine AS node
+FROM node:13.3.0-alpine AS node
 FROM ruby:2.5.1-alpine
 
 ENV LANG C.UTF-8
@@ -41,8 +41,8 @@ ADD . $ROOT_PATH
 
 # ----- Install node and yarn -----
 
-# @see https://github.com/nodejs/docker-node/blob/bd74777e9e5c89685146d4963b6bb78970dd2133/10/alpine/Dockerfile#L48
-ENV YARN_VERSION 1.7.0
+# @see https://github.com/nodejs/docker-node/blob/cbdde22f468f5032a59d52330894544a0756f0fb/13/alpine3.10/Dockerfile#L72
+ENV YARN_VERSION 1.19.2
 
 RUN mkdir /opt
 COPY --from=node /opt/yarn-v$YARN_VERSION/ /opt/yarn-v$YARN_VERSION/
