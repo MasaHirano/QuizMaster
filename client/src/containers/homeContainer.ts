@@ -10,7 +10,7 @@ import { AppState, HomeState, HomeDispatchProps, HomeActionTypes } from '../type
 const mapStateToProps: MapStateToProps<HomeState, any, AppState> =
   (state: AppState) => state.home
 
-const mapDispatchToProps: MapDispatchToProps<HomeDispatchProps, null> =
+const mapDispatchToProps: MapDispatchToProps<HomeDispatchProps, any> =
   (dispatch: ThunkDispatch<AppState, undefined, Action<HomeActionTypes>>) => {
     return {
       onDidMount: () => {

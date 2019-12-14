@@ -14,7 +14,7 @@ import { ThunkDispatch } from 'redux-thunk'
 const mapStateToProps: MapStateToProps<QuestionState, any, AppState> =
   (state: AppState) => state.question
 
-const mapDispatchToProps: MapDispatchToProps<QuestionDispatchProps, null> =
+const mapDispatchToProps: MapDispatchToProps<QuestionDispatchProps, any> =
   (dispatch: ThunkDispatch<AppState, undefined, QuestionActionTypes>) => {
     return {
       onDidMount: (payload) => {
