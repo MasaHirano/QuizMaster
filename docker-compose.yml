@@ -16,7 +16,7 @@ services:
       - bundle_data:/usr/local/bundle
       - node_modules_data:/app/client/node_modules
     ports:
-      # - "3000:3000"
+      - "3000:3000"
       - "3001:3001"
     depends_on:
       - db
