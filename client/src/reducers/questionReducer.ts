@@ -6,7 +6,7 @@ import {
   CLEAR_STATE,
   QuestionActionTypes
 } from '../types/questionTypes'
-import { Reducer } from 'react'
+import { Reducer } from 'redux'
 
 const initialState: QuestionState = {
   correct: false,

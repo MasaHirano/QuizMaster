@@ -1,5 +1,6 @@
 import { Action } from "redux"
 import { QuestionState } from "./questionTypes"
+import { RouterState } from "connected-react-router"
 
 export type Question = {
   id: Number,
@@ -20,8 +21,8 @@ export type ActionReceiveQuestions = Action<typeof RECEIVE_QUESTIONS> & HomeStat
 export type HomeActionTypes =
   | ActionReceiveQuestions
 
-// TODO: other states must be added
 export type AppState = {
   home: HomeState,
-  question: QuestionState
+  question: QuestionState,
+  router: RouterState
 }
