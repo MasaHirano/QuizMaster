@@ -1,2 +1,2 @@
-web: env PORT=3000 yarn --cwd client start
+web: env PORT=3000 npm --prefix client start
 api: bundle exec rails s -p 3001 -b 0.0.0.0
