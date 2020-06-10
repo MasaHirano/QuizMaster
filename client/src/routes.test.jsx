@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Routes from './routes';
 import Home from './containers/homeContainer';
