@@ -39,15 +39,13 @@ RUN apk update && \
 
 ADD . $ROOT_PATH
 
-# ----- Install node and yarn -----
+# ----- Install node -----
 
-# @see https://github.com/nodejs/docker-node/blob/cbdde22f468f5032a59d52330894544a0756f0fb/13/alpine3.10/Dockerfile#L72
-ENV YARN_VERSION 1.19.2
-
-RUN mkdir -p /opt
-COPY --from=node /opt/yarn-v$YARN_VERSION/ /opt/yarn-v$YARN_VERSION/
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=node /usr/local/bin/node /usr/local/bin/
-RUN ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn && \
-    ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg && \
-    yarn --cwd client install
+RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+    ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx && \
+    ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
+WORKDIR $ROOT_PATH/client
+RUN npm install
