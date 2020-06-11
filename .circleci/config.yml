@@ -5,17 +5,28 @@ orbs:
   node: circleci/node@3.0.0
 
 jobs:
-  test_react:
+  build_react:
     docker:
       - image: cimg/node:13.3.0
     steps:
       - checkout
       - node/install-packages:
           app-dir: ~/project/client
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - client
+
+  test_react:
+    docker:
+      - image: cimg/node:13.3.0
+    steps:
+      - attach_workspace:
+          at: /root/project
       - run:
           name: 'Run react-scripts test powered by jest'
           command: npx react-scripts test --env=jsdom --watchAll=false
-          working_directory: ~/project/client
+          working_directory: /root/project/client
 
   test_rails:
     docker:
@@ -47,7 +58,10 @@ jobs:
 
 workflows:
   version: 2
-  test_react_and_railis:
+  build-test:
     jobs:
-      - test_react
+      - build_react
+      - test_react:
+          requires:
+            - build_react
       - test_rails
