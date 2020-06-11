@@ -5,46 +5,31 @@ orbs:
   node: circleci/node@3.0.0
 
 jobs:
-  build:
+  test_react:
     docker:
-      - image: cimg/ruby:2.6.5-node
-    steps:
-      - checkout
-      - ruby/install-deps
+      - image: cimg/node:13.3.0
     working_directory: ~/client
     steps:
+      - checkout
       - node/install:
           node-version: '13.3.0'
-      - run:
-          name: Show node version
-          command: node -v
-      - run:
-          name: Show npm version
-          command: npm -v
       - node/install-packages
+      - run:
+          command: npx react-scripts test --env=jsdom --watchAll=false
 
-  test:
+  test_rails:
     docker:
-      - image: cimg/ruby:2.6.5-node
+      - image: cimg/ruby:2.6.5
     environment:
       RAILS_ENV: test
     steps:
       - checkout
       - ruby/install-deps
       - ruby/rspec-test
-    working_directory: ~/client
-    steps:
-      - node/install:
-          node-version: '13.3.0'
-      - node/install-packages
-      - run:
-          command: npm run test
 
 workflows:
   version: 2
-  build_and_test:     # The name of our workflow is "build_and_test"
+  test_react_and_railis:     # The name of our workflow is "build_and_test"
     jobs:             # The list of jobs we run as part of this workflow.
-      - build         # Run build first.
-      - test:         # Then run test,
-          requires:   # Test requires that build passes for it to run.
-            - build   # Finally, run the build job.
+      - test_react         # Run build first.
+      - test_rails
