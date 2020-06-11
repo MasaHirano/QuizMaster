@@ -13,7 +13,7 @@ jobs:
       - node/install-packages:
           app-dir: ~/project/client
       - persist_to_workspace:
-          root: /root/project
+          root: ~/project
           paths:
             - client
 
@@ -22,11 +22,11 @@ jobs:
       - image: cimg/node:13.3.0
     steps:
       - attach_workspace:
-          at: /root/project
+          at: ~/project
       - run:
           name: 'Run react-scripts test powered by jest'
           command: npx react-scripts test --env=jsdom --watchAll=false
-          working_directory: /root/project/client
+          working_directory: ~/project/client
 
   build_rails:
     docker:
@@ -93,12 +93,11 @@ workflows:
   version: 2
   build-test:
     jobs:
-      # - build_react
-      # - test_react:
-      #     requires:
-      #       - build_react
+      - build_react
+      - test_react:
+          requires:
+            - build_react
       - build_rails
       - test_rails:
           requires:
             - build_rails
-
