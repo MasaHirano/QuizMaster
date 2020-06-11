@@ -34,8 +34,7 @@ jobs:
       - checkout
       - run:
           command: sudo apt update && sudo apt install -y postgresql-client libpq-dev
-      - ruby/install-deps:
-          bundler-version: '1.17.2'
+      - ruby/install-deps
       # Here we make sure that the secondary container boots
       # up before we run operations on the database.
       - run:
