@@ -28,20 +28,13 @@ gem 'bootsnap', '~> 1.4', '>= 1.4.5', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # RSpec for Rails-3+ http://relishapp.com/rspec/rspec-rails
-  gem 'rspec-rails', '~> 3.9'
-  # Factory Bot ♥ Rails https://thoughtbot.com/services/ruby-on-rails
-  gem 'factory_bot_rails'
-end
-
 group :development do
   gem 'listen', '~> 3.2', '>= 3.2.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Use Pry as Rails console
   gem 'pry-rails'
   gem 'pry-doc'
@@ -53,7 +46,12 @@ group :development do
 end
 
 group :test do
+  # RSpec for Rails-3+ http://relishapp.com/rspec/rspec-rails
+  gem 'rspec-rails', '~> 3.9'
+  # RSpec results that your CI can read https://github.com/sj26/rspec_junit_formatter
   gem 'rspec_junit_formatter'
+  # Factory Bot ♥ Rails https://thoughtbot.com/services/ruby-on-rails
+  gem 'factory_bot_rails'
 end
 
 # ActiveAdmin
