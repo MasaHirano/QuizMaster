@@ -8,28 +8,47 @@ jobs:
   test_react:
     docker:
       - image: cimg/node:13.3.0
-    working_directory: ~/client
     steps:
       - checkout
-      - node/install:
-          node-version: '13.3.0'
-      - node/install-packages
+      - node/install-packages:
+          app-dir: ~/project/client
       - run:
+          name: 'Run react-scripts test powered by jest'
           command: npx react-scripts test --env=jsdom --watchAll=false
+          working_directory: ~/project/client
 
   test_rails:
     docker:
       - image: cimg/ruby:2.6.5
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:10.4-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: QuizMaster_test
     environment:
-      RAILS_ENV: test
+      DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
     steps:
       - checkout
-      - ruby/install-deps
+      - run:
+          command: sudo apt update && sudo apt install -y postgresql-client libpq-dev
+      - ruby/install-deps:
+          bundler-version: '1.17.2'
+      # Here we make sure that the secondary container boots
+      # up before we run operations on the database.
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database Setup
+          command: bundle exec rails db:create db:migrate db:seed
       - ruby/rspec-test
 
 workflows:
   version: 2
-  test_react_and_railis:     # The name of our workflow is "build_and_test"
-    jobs:             # The list of jobs we run as part of this workflow.
-      - test_react         # Run build first.
+  test_react_and_railis:
+    jobs:
+      - test_react
       - test_rails
