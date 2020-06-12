@@ -3,12 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0', '>= 6.0.2'
-# Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1', '>= 1.1.4'
-# Use Puma as the app server
-gem 'puma', '~> 4.3', '>= 4.3.1'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails' https://rubygems.org/gems/rails
+gem 'rails', '~> 6.0', '>= 6.0.3.1'
+# Use postgresql as the database for Active Record https://rubygems.org/gems/pg
+gem 'pg', '~> 1.2', '>= 1.2.3'
+# Use Puma as the app server https://rubygems.org/gems/puma
+gem 'puma', '~> 4.3', '>= 4.3.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -22,44 +22,49 @@ gem 'puma', '~> 4.3', '>= 4.3.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.4', '>= 1.4.5', require: false
+# Boot large ruby/rails apps faster https://rubygems.org/gems/bootsnap
+gem 'bootsnap', '~> 1.4', '>= 1.4.6', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
 group :development do
+  # Listens to file modifications and notifies you about the changes https://rubygems.org/gems/listen
   gem 'listen', '~> 3.2', '>= 3.2.1'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # Rails application preloader https://rubygems.org/gems/spring
+  gem 'spring', '~> 2.1'
+  # Makes spring watch files using the listen gem gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Use Pry as Rails console
-  gem 'pry-rails'
-  gem 'pry-doc'
-  gem 'pry-byebug'
-  # Manage Procfile-based applications
-  gem 'foreman'
-  # Annotate Rails classes with schema and routes info
-  gem 'annotate'
+  # Debugging in Ruby 2
+  gem 'byebug', '~> 11.1', '>= 11.1.3', platforms: [:mri, :mingw, :x64_mingw]
+  # Use Pry as your rails console https://rubygems.org/gems/pry-rails
+  gem 'pry-rails', '~> 0.3.9'
+  # Provide MRI Core documentation and source code for the Pry REPL https://rubygems.org/gems/pry-doc
+  gem 'pry-doc', '~> 1.1'
+  # Step-by-step debugging and stack navigation in Pry https://rubygems.org/gems/pry-byebug
+  gem 'pry-byebug', '~> 3.9'
+  # Manage Procfile-based applications https://rubygems.org/gems/foreman
+  gem 'foreman', '~> 0.87.1'
+  # Annotate Rails classes with schema and routes info https://rubygems.org/gems/annotate
+  gem 'annotate', '~> 3.1', '>= 3.1.1'
 end
 
 group :test do
-  # RSpec for Rails-3+ http://relishapp.com/rspec/rspec-rails
-  gem 'rspec-rails', '~> 3.9'
-  # RSpec results that your CI can read https://github.com/sj26/rspec_junit_formatter
-  gem 'rspec_junit_formatter'
-  # Factory Bot ♥ Rails https://thoughtbot.com/services/ruby-on-rails
-  gem 'factory_bot_rails'
+  # A testing framework for Rails 5+ https://rubygems.org/gems/rspec-rails
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
+  # RSpec results that your CI can read https://rubygems.org/gems/rspec_junit_formatter
+  gem 'rspec_junit_formatter', '~> 0.4.1'
+  # Factory Bot ♥ Rails https://rubygems.org/gems/factory_bot_rails
+  gem 'factory_bot_rails', '~> 5.2'
 end
 
-# ActiveAdmin
-gem 'devise'
-gem 'activeadmin'
+# Flexible authentication solution for Rails with Warden https://rubygems.org/gems/devise
+gem 'devise', '~> 4.7', '>= 4.7.2'
+# The administration framework for Ruby on Rails https://rubygems.org/gems/activeadmin
+gem 'activeadmin', '~> 2.7'
 
-# Convert numbers to words using I18N.
-gem 'numbers_and_words'
+# Convert numbers to words using I18N. https://rubygems.org/gems/numbers_and_words
+gem 'numbers_and_words', '~> 0.11.8'
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data'
+# Timezone Data for TZInfo https://rubygems.org/gems/tzinfo-data
+gem 'tzinfo-data', '~> 1.2020', '>= 1.2020.1'
