@@ -69,6 +69,6 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 
-# Visual Studio Code settings
+# ----- Added by myself -----
 .devcontainer
-
+.DS_Store
