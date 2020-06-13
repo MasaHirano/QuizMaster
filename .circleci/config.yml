@@ -19,7 +19,7 @@ jobs:
 
   test_rails:
     docker:
-      - image: cimg/ruby:2.6.5-node
+      - image: cimg/ruby:2.6.5
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
