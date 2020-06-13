@@ -62,6 +62,8 @@ end
 gem 'devise', '~> 4.7', '>= 4.7.2'
 # The administration framework for Ruby on Rails https://rubygems.org/gems/activeadmin
 gem 'activeadmin', '~> 2.7'
+# CoffeeScript adapter for the Rails asset pipeline. Requited by ActiveAdmin https://rubygems.org/gems/coffee-rails
+gem 'coffee-rails', '~> 5.0'
 
 # Convert numbers to words using I18N. https://rubygems.org/gems/numbers_and_words
 gem 'numbers_and_words', '~> 0.11.8'
