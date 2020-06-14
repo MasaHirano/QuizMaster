@@ -5,19 +5,30 @@ orbs:
   node: circleci/node@3.0.0
 
 jobs:
-  test_react:
+  build_react:
     docker:
       - image: cimg/node:13.3.0
     steps:
       - checkout
       - node/install-packages:
           app-dir: ~/project/client
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - client
+
+  test_react:
+    docker:
+      - image: cimg/node:13.3.0
+    steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: 'Run react-scripts test powered by jest'
           command: npx react-scripts test --env=jsdom --watchAll=false
           working_directory: ~/project/client
 
-  test_rails:
+  build_rails:
     docker:
       - image: cimg/ruby:2.6.5
         environment:
@@ -34,20 +45,59 @@ jobs:
       - checkout
       - run:
           command: sudo apt update && sudo apt install -y postgresql-client libpq-dev
-      - ruby/install-deps
-      # Here we make sure that the secondary container boots
-      # up before we run operations on the database.
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Bundle Install
+          command: bundle install
+      - save_cache:
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+              - ~/.rubygems
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Database Setup
           command: bundle exec rails db:create db:migrate db:seed
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  test_rails:
+    docker:
+      - image: cimg/ruby:2.6.5
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:10.4-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: QuizMaster_test
+    environment:
+      DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+      - run:
+          command: sudo apt update && sudo apt install -y postgresql-client libpq-dev
       - ruby/rspec-test
 
 workflows:
   version: 2
-  test_react_and_railis:
+  build-test:
     jobs:
-      - test_react
-      - test_rails
+      - build_react
+      - test_react:
+          requires:
+            - build_react
+      - build_rails
+      - test_rails:
+          requires:
+            - build_rails
