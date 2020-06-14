@@ -60,7 +60,7 @@ $ docker-compose run --rm app bundle exec rspec spec/models
 
 Using jest and enzyme to tests if components are rendered normally.
 ```
-$ docker-compose run --rm app yarn --cwd client test
+$ docker-compose run --rm app npm --prefix client test
 ```
 
 ## Author
