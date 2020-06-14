@@ -4,10 +4,27 @@ orbs:
   ruby: circleci/ruby@1.0.0
   node: circleci/node@3.0.0
 
+react_defaults: &react_defaults
+  docker:
+    - image: cimg/node:13.3.0
+
+rails_defaults: &rails_defaults
+  docker:
+    - image: cimg/ruby:2.6.5
+      environment:
+        RAILS_ENV: test
+        PGHOST: 127.0.0.1
+        PGUSER: root
+    - image: circleci/postgres:10.4-alpine
+      environment:
+        POSTGRES_USER: root
+        POSTGRES_DB: QuizMaster_test
+  environment:
+    DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
+
 jobs:
   build_react:
-    docker:
-      - image: cimg/node:13.3.0
+    <<: *react_defaults
     steps:
       - checkout
       - node/install-packages:
@@ -18,8 +35,7 @@ jobs:
             - client
 
   test_react:
-    docker:
-      - image: cimg/node:13.3.0
+    <<: *react_defaults
     steps:
       - attach_workspace:
           at: ~/project
@@ -29,18 +45,7 @@ jobs:
           working_directory: ~/project/client
 
   build_rails:
-    docker:
-      - image: cimg/ruby:2.6.5
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-      - image: circleci/postgres:10.4-alpine
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: QuizMaster_test
-    environment:
-      DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
+    <<: *rails_defaults
     steps:
       - checkout
       - run:
@@ -67,18 +72,7 @@ jobs:
             - .
 
   test_rails:
-    docker:
-      - image: cimg/ruby:2.6.5
-        environment:
-          RAILS_ENV: test
-          PGHOST: 127.0.0.1
-          PGUSER: root
-      - image: circleci/postgres:10.4-alpine
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: QuizMaster_test
-    environment:
-      DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
+    <<: *rails_defaults
     steps:
       - attach_workspace:
           at: ~/project
