@@ -34,6 +34,7 @@ RUN apk update && \
       tzdata \
       libstdc++ \
       yaml && \
+    gem install bundler --version 2.1.4 && \
     bundle install -j4 && \
     apk del .build-dependencies
 
