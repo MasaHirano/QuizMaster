@@ -44,6 +44,16 @@ jobs:
           command: npx react-scripts test --env=jsdom --watchAll=false
           working_directory: ~/project/client
 
+  lint_react:
+    <<: *react_defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: 'Run eslint'
+          command: npx eslint --ext js,jsx,ts,tsx .
+          working_directory: ~/project/client
+
   build_rails:
     <<: *rails_defaults
     steps:
@@ -89,6 +99,9 @@ workflows:
     jobs:
       - build_react
       - test_react:
+          requires:
+            - build_react
+      - lint_react:
           requires:
             - build_react
       - build_rails

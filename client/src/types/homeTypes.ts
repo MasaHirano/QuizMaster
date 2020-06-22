@@ -1,10 +1,10 @@
-import { Action } from "redux"
-import { QuestionState } from "./questionTypes"
-import { RouterState } from "connected-react-router"
+import { Action } from 'redux';
+import { RouterState } from 'connected-react-router';
+import { QuestionState } from './questionTypes';
 
 export type Question = {
-  id: Number,
-  content: String
+  id: number,
+  content: string
 }
 
 export type HomeState = {
@@ -15,7 +15,7 @@ export type HomeDispatchProps = {
 }
 export type HomeProps = HomeState & HomeDispatchProps
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export type ActionReceiveQuestions = Action<typeof RECEIVE_QUESTIONS> & HomeState
 
 export type HomeActionTypes =
