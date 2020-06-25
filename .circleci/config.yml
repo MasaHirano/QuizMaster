@@ -10,7 +10,7 @@ react_defaults: &react_defaults
 
 rails_defaults: &rails_defaults
   docker:
-    - image: cimg/ruby:2.6.5
+    - image: cimg/ruby:2.7.1
       environment:
         RAILS_ENV: test
         PGHOST: 127.0.0.1

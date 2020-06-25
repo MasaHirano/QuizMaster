@@ -1,5 +1,5 @@
 FROM node:13.3.0-alpine AS node
-FROM ruby:2.6.5-alpine
+FROM ruby:2.7.1-alpine
 
 ENV LANG C.UTF-8
 
