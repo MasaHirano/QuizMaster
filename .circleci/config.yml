@@ -6,7 +6,7 @@ orbs:
 
 react_defaults: &react_defaults
   docker:
-    - image: cimg/node:13.3.0
+    - image: cimg/node:14.4.0
 
 rails_defaults: &rails_defaults
   docker:
