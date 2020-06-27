@@ -29,6 +29,7 @@ jobs:
       - checkout
       - node/install-packages:
           app-dir: ~/project/client
+          cache-version: v2
       - persist_to_workspace:
           root: ~/project
           paths:
