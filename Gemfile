@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails' https://rubygems.org/gems/rails
-gem 'rails', '~> 6.0', '>= 6.0.3.1'
+gem 'rails', '~> 6.0', '>= 6.0.3.2'
 # Use postgresql as the database for Active Record https://rubygems.org/gems/pg
 gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server https://rubygems.org/gems/puma
@@ -55,7 +55,7 @@ group :test do
   # RSpec results that your CI can read https://rubygems.org/gems/rspec_junit_formatter
   gem 'rspec_junit_formatter', '~> 0.4.1'
   # Factory Bot ♥ Rails https://rubygems.org/gems/factory_bot_rails
-  gem 'factory_bot_rails', '~> 5.2'
+  gem 'factory_bot_rails', '~> 6.0'
 end
 
 # Flexible authentication solution for Rails with Warden https://rubygems.org/gems/devise
