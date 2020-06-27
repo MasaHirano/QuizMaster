@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   db:
     image: postgres:10.4-alpine
@@ -25,4 +25,3 @@ volumes:
   db_data:
   bundle_data:
   node_modules_data:
-
