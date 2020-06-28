@@ -6,11 +6,11 @@ orbs:
 
 react_defaults: &react_defaults
   docker:
-    - image: cimg/node:13.3.0
+    - image: cimg/node:14.4.0
 
 rails_defaults: &rails_defaults
   docker:
-    - image: cimg/ruby:2.6.5
+    - image: cimg/ruby:2.7.1
       environment:
         RAILS_ENV: test
         PGHOST: 127.0.0.1
@@ -29,6 +29,7 @@ jobs:
       - checkout
       - node/install-packages:
           app-dir: ~/project/client
+          cache-version: v2
       - persist_to_workspace:
           root: ~/project
           paths:
