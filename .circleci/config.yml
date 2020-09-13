@@ -4,27 +4,28 @@ orbs:
   ruby: circleci/ruby@1.0.0
   node: circleci/node@3.0.0
 
-react_defaults: &react_defaults
-  docker:
-    - image: cimg/node:14.4.0
+executors:
+  react:
+    docker:
+      - image: cimg/node:14.4.0
 
-rails_defaults: &rails_defaults
-  docker:
-    - image: cimg/ruby:2.7.1
-      environment:
-        RAILS_ENV: test
-        PGHOST: 127.0.0.1
-        PGUSER: root
-    - image: circleci/postgres:10.4-alpine
-      environment:
-        POSTGRES_USER: root
-        POSTGRES_DB: QuizMaster_test
-  environment:
-    DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
+  rails:
+    docker:
+      - image: cimg/ruby:2.7.1
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:10.4-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: QuizMaster_test
+    environment:
+      DATABASE_URL: postgres://root@localhost:5432/QuizMaster_test
 
 jobs:
   build_react:
-    <<: *react_defaults
+    executor: react
     steps:
       - checkout
       - node/install-packages:
@@ -36,7 +37,7 @@ jobs:
             - client
 
   test_react:
-    <<: *react_defaults
+    executor: react
     steps:
       - attach_workspace:
           at: ~/project
@@ -46,7 +47,7 @@ jobs:
           working_directory: ~/project/client
 
   lint_react:
-    <<: *react_defaults
+    executor: react
     steps:
       - attach_workspace:
           at: ~/project
@@ -56,7 +57,7 @@ jobs:
           working_directory: ~/project/client
 
   build_rails:
-    <<: *rails_defaults
+    executor: rails
     steps:
       - checkout
       - run:
@@ -83,7 +84,7 @@ jobs:
             - .
 
   test_rails:
-    <<: *rails_defaults
+    executor: rails
     steps:
       - attach_workspace:
           at: ~/project
