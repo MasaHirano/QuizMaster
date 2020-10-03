@@ -13,20 +13,19 @@ class Home extends PureComponent<HomeProps> {
     const { questions } = this.props;
     return (
       <Container text>
-        {questions
-          && (
-            <Container>
-              <Segment.Group>
-                {questions.map((question) => (
-                  <Segment key={question.id}>
-                    <Link to={`/questions/${question.id}`}>
-                      {question.content.replace(/<[^>]+>/g, '')}
-                    </Link>
-                  </Segment>
-                ))}
-              </Segment.Group>
-            </Container>
-          )}
+        {questions && (
+          <Container>
+            <Segment.Group>
+              {questions.map((question) => (
+                <Segment key={question.id}>
+                  <Link to={`/questions/${question.id}`}>
+                    {question.content.replace(/<[^>]+>/g, '')}
+                  </Link>
+                </Segment>
+              ))}
+            </Segment.Group>
+          </Container>
+        )}
       </Container>
     );
   }

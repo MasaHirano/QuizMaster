@@ -8,15 +8,19 @@ import {
   loadQuestion,
   clearState,
 } from '../actions/questionActions';
-import { QuestionState, QuestionDispatchProps, QuestionActionTypes } from '../types/questionTypes';
+import {
+  QuestionState,
+  QuestionDispatchProps,
+  QuestionActionTypes,
+} from '../types/questionTypes';
 import { AppState } from '../types/homeTypes';
 
 const mapStateToProps: MapStateToProps<QuestionState, any, AppState> = (
-  state: AppState,
+  state: AppState
 ) => state.question;
 
 const mapDispatchToProps: MapDispatchToProps<QuestionDispatchProps, any> = (
-  dispatch: ThunkDispatch<AppState, undefined, QuestionActionTypes>,
+  dispatch: ThunkDispatch<AppState, undefined, QuestionActionTypes>
 ) => ({
   onDidMount: (payload) => {
     dispatch(loadQuestion(payload));

@@ -14,43 +14,56 @@ import {
   QuestionDetail,
 } from '../types/questionTypes';
 
-const receiveQuestion: ActionCreator<ActionReceiveQuestion> = (question: QuestionDetail) => ({
+const receiveQuestion: ActionCreator<ActionReceiveQuestion> = (
+  question: QuestionDetail
+) => ({
   type: RECEIVE_QUESTION,
   question,
 });
 
 export const loadQuestion: (
   questionParams: QuestionId
-) => ThunkAction<void, AppState, undefined, ActionReceiveQuestion> = ({ id }) => (dispatch) => {
-  window.fetch(`/api/questions/${id}`)
+) => ThunkAction<void, AppState, undefined, ActionReceiveQuestion> = ({
+  id,
+}) => (dispatch) => {
+  window
+    .fetch(`/api/questions/${id}`)
     .then((response) => response.json())
-    .then((json) => dispatch(
-      receiveQuestion({
-        id: json.id,
-        content: json.content,
-        answer: json.answer,
-        createdAt: json.created_at,
-        updatedAt: json.updated_at,
-      }),
-    ))
+    .then((json) =>
+      dispatch(
+        receiveQuestion({
+          id: json.id,
+          content: json.content,
+          answer: json.answer,
+          createdAt: json.created_at,
+          updatedAt: json.updated_at,
+        })
+      )
+    )
     .catch((error) => console.error(error));
 };
 
-export const writeAnswer: ActionCreator<ActionWriteAnswer> = (name: string, value: string) => ({
+export const writeAnswer: ActionCreator<ActionWriteAnswer> = (
+  name: string,
+  value: string
+) => ({
   type: WRITE_ANSWER,
   name,
   value,
 });
 
 export const receiveAnswerResult: ActionCreator<ActionReceiveAnswerResult> = (
-  correct: boolean,
+  correct: boolean
 ) => ({
   type: RECEIVE_ANSWER_RESULT,
   correct,
 });
 
 export const submitAnswer: () => ThunkAction<
-  void, AppState, undefined, ActionReceiveAnswerResult
+  void,
+  AppState,
+  undefined,
+  ActionReceiveAnswerResult
 > = () => (dispatch, getState) => {
   const { question, answer } = getState().question;
   window

@@ -15,22 +15,17 @@ describe('<Home />', () => {
     ];
     onDidMountMock = jest.fn();
     wrapper = shallow(
-      <Home
-        questions={questions}
-        onDidMount={onDidMountMock}
-      />,
+      <Home questions={questions} onDidMount={onDidMountMock} />
     );
   });
 
   describe('render()', () => {
     it('calls onDidMount', () => {
-      expect(onDidMountMock)
-        .toHaveBeenCalled();
+      expect(onDidMountMock).toHaveBeenCalled();
     });
 
     it('shows two rows when two questions are in state', () => {
-      expect(wrapper.find(Segment))
-        .toHaveLength(2);
+      expect(wrapper.find(Segment)).toHaveLength(2);
     });
   });
 });
