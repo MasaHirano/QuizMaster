@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "npx eslint --ext js,jsx,ts,tsx,json ."
+    "lint": "npx eslint --ext js,jsx,ts,tsx,json .",
+    "check-format": "npx prettier --check ."
   },
   "devDependencies": {
     "@babel/helper-call-delegate": "^7.10.3",
