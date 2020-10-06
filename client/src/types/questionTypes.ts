@@ -4,67 +4,61 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Action } from 'redux';
 
 export type QuestionId = {
-  id: string
-}
+  id: string;
+};
 export type QuestionDetail = QuestionId & {
-  content: string,
-  answer: string,
-  createdAt: string,
-  updatedAt: string
-}
+  content: string;
+  answer: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 type QuestionLoaded = {
-  question: QuestionDetail
-}
+  question: QuestionDetail;
+};
 type AnswerResult = {
-  correct: boolean,
-  wrong: boolean,
-}
+  correct: boolean;
+  wrong: boolean;
+};
 type AnswerSubmission = {
-  answer: string
-}
-export type QuestionState =
-  & QuestionLoaded
-  & AnswerResult
-  & AnswerSubmission
+  answer: string;
+};
+export type QuestionState = QuestionLoaded & AnswerResult & AnswerSubmission;
 
 export type QuestionDispatchProps = {
-  onDidMount: (arg0: QuestionId) => void,
-  onWillUnmount: () => void,
+  onDidMount: (arg0: QuestionId) => void;
+  onWillUnmount: () => void;
   onChange: (
     event: ChangeEvent<HTMLInputElement>,
     data: InputOnChangeData
-  ) => void,
-  onSubmit: (
-    event: FormEvent<HTMLFormElement>,
-    data: FormProps
-  ) => void
-}
+  ) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>, data: FormProps) => void;
+};
 
-export type QuestionProps =
-  & QuestionState
-  & QuestionDispatchProps
-  & RouteComponentProps<QuestionId>
+export type QuestionProps = QuestionState &
+  QuestionDispatchProps &
+  RouteComponentProps<QuestionId>;
 
 export const RECEIVE_QUESTION = 'RECEIVE_QUESTION';
-export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION> & QuestionLoaded
+export type ActionReceiveQuestion = Action<typeof RECEIVE_QUESTION> &
+  QuestionLoaded;
 
 export const WRITE_ANSWER = 'WRITE_ANSWER';
 export type ActionWriteAnswer = Action<typeof WRITE_ANSWER> & {
-  name: string,
-  value: string
-}
+  name: string;
+  value: string;
+};
 
 export const RECEIVE_ANSWER_RESULT = 'RECEIVE_ANSWER_RESULT';
 export type ActionReceiveAnswerResult = Action<typeof RECEIVE_ANSWER_RESULT> & {
-  correct: boolean
-}
+  correct: boolean;
+};
 
 export const CLEAR_STATE = 'CLEAR_STATE';
-export type ActionClearState = Action<typeof CLEAR_STATE>
+export type ActionClearState = Action<typeof CLEAR_STATE>;
 
 export type QuestionActionTypes =
   | ActionReceiveQuestion
   | ActionWriteAnswer
   | ActionReceiveAnswerResult
-  | ActionClearState
+  | ActionClearState;

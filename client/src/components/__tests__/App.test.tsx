@@ -11,7 +11,7 @@ it('renders without crashing', () => {
         <p>test rendering</p>
       </div>
     </App>,
-    div,
+    div
   );
   ReactDOM.unmountComponentAtNode(div);
 });

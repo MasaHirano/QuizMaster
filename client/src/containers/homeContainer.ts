@@ -6,13 +6,18 @@ import Home from '../components/Home';
 import { loadQuestions } from '../actions/homeActions';
 
 import {
-  AppState, HomeState, HomeDispatchProps, HomeActionTypes,
+  AppState,
+  HomeState,
+  HomeDispatchProps,
+  HomeActionTypes,
 } from '../types/homeTypes';
 
-const mapStateToProps: MapStateToProps<HomeState, any, AppState> = (state: AppState) => state.home;
+const mapStateToProps: MapStateToProps<HomeState, any, AppState> = (
+  state: AppState
+) => state.home;
 
 const mapDispatchToProps: MapDispatchToProps<HomeDispatchProps, any> = (
-  dispatch: ThunkDispatch<AppState, undefined, Action<HomeActionTypes>>,
+  dispatch: ThunkDispatch<AppState, undefined, Action<HomeActionTypes>>
 ) => ({
   onDidMount: () => {
     dispatch(loadQuestions());

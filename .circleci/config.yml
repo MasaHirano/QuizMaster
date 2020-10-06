@@ -46,14 +46,18 @@ jobs:
           command: npx react-scripts test --env=jsdom --watchAll=false
           working_directory: ~/project/client
 
-  lint_react:
+  quality_react:
     executor: react
     steps:
       - attach_workspace:
           at: ~/project
       - run:
           name: 'Run eslint'
-          command: npx eslint --ext js,jsx,ts,tsx .
+          command: npm run lint
+          working_directory: ~/project/client
+      - run:
+          name: 'Run prettier check'
+          command: npm run check-format
           working_directory: ~/project/client
 
   build_rails:
@@ -103,7 +107,7 @@ workflows:
       - test_react:
           requires:
             - build_react
-      - lint_react:
+      - quality_react:
           requires:
             - build_react
       - build_rails

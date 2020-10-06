@@ -10,13 +10,12 @@ import NotFound from './components/NotFound';
 jest.mock('./containers/homeContainer');
 jest.mock('./containers/questionContainer');
 
-const renderRoutes = (path: string) => (
+const renderRoutes = (path: string) =>
   mount(
     <MemoryRouter initialEntries={[path]}>
       <Routes />
-    </MemoryRouter>,
-  )
-);
+    </MemoryRouter>
+  );
 
 describe('#routes', () => {
   it('renders home page on initial route', () => {

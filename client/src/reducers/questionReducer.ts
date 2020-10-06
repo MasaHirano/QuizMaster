@@ -23,7 +23,7 @@ const initialState: QuestionState = {
 
 const questionReducer: Reducer<QuestionState, QuestionActionTypes> = (
   state = initialState,
-  action,
+  action
 ) => {
   switch (action.type) {
     case RECEIVE_QUESTION:

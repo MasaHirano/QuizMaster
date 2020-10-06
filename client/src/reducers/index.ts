@@ -5,10 +5,11 @@ import { History } from 'history';
 import homeReducer from './homeReducer';
 import questionReducer from './questionReducer';
 
-const createRootReducer: (history: History) => Reducer = (history) => combineReducers({
-  home: homeReducer,
-  question: questionReducer,
-  router: connectRouter(history),
-});
+const createRootReducer: (history: History) => Reducer = (history) =>
+  combineReducers({
+    home: homeReducer,
+    question: questionReducer,
+    router: connectRouter(history),
+  });
 
 export default createRootReducer;

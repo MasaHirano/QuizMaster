@@ -44,7 +44,7 @@ describe('<Question />', () => {
         history={createMemoryHistory()}
         location={location}
         match={matchParams}
-      />,
+      />
     );
     'Tokyo'.split('').reduce((accumulator, char) => {
       const joined = accumulator + char;
