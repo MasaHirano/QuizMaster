@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails' https://rubygems.org/gems/rails
-gem 'rails', '~> 6.0', '>= 6.0.3.2'
+gem 'rails', '~> 6.1', '>= 6.1.3.2'
 # Use postgresql as the database for Active Record https://rubygems.org/gems/pg
 gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server https://rubygems.org/gems/puma
@@ -62,6 +62,9 @@ end
 gem 'devise', '~> 4.7', '>= 4.7.2'
 # The administration framework for Ruby on Rails https://rubygems.org/gems/activeadmin
 gem 'activeadmin', '~> 2.7'
+# Integrate SassC-Ruby into Rails. https://rubygems.org/gems/sassc-rails
+# TODO: Remove once migrating activeadmin to use webpacker
+gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 
 # Convert numbers to words using I18N. https://rubygems.org/gems/numbers_and_words
 gem 'numbers_and_words', '~> 0.11.8'
