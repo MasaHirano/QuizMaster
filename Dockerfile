@@ -14,6 +14,8 @@ ADD Gemfile.lock $ROOT_PATH/Gemfile.lock
 
 RUN apk update && \
     apk upgrade && \
+    # They're supposed to be deleted for production images at last of this RUN command
+    # with `apk del .build-dependencies`
     apk add --update --no-cache --virtual=.build-dependencies \
       build-base \
       libgcc \
@@ -34,9 +36,7 @@ RUN apk update && \
       tzdata \
       libstdc++ \
       yaml && \
-    gem install bundler --version 2.1.4 && \
-    bundle install -j4 && \
-    apk del .build-dependencies
+    gem install bundler --version 2.1.4
 
 ADD . $ROOT_PATH
 
